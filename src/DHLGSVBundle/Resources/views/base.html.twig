@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+        <meta name="robots" content="noindex,nofollow"/>
+        <title>{% block title %}LGSV Plus{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('bundles/dhlgsv/bootstrap/css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/dhlgsv/bootstrap/css/bootstrap-theme.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/dhlgsv/lgsv/css/main.css') }}"/>
+        {% block head %}{% endblock %}
+    </head>
+    <body role="document">
+ 
+        <!-- navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#menu-toggle">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">LGSV Plus</a>
+                </div>
+ 
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="menu-toggle">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ path('new_mieter') }}">Mieter hinzufügen</a></li>
+                        <li><a href="{{ path('new_house') }}">Liegenschaft hinzufügen</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- /navbar -->
+ 
+        <div class='container'>
+            {% block body %}{% endblock %}
+        </div>
+ 
+        {% block javascripts %}
+            <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="{{ asset('bundles/dhlgsv/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/dhlgsv/lgsv/js/script.js') }}" type="text/javascript"></script>
+        {% endblock %}
+ 
+    </body>
+ 
+</html>

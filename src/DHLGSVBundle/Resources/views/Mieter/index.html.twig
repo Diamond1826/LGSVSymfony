@@ -1,0 +1,120 @@
+{% extends 'DHLGSVBundle::base.html.twig' %}
+{% block body %}
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Suche</div>
+					<div class="panel-body">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Mieter</div>
+				{% if mieters == false %}
+					<div class="panel-body">
+						<p>Noch keine Mieter vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<th>Nachname</th>
+								<th>Vorname</th>
+								<th>Strasse</th>
+								<th>PLZ</th>
+								<th>Ort</th>
+								<th>E-Mail</th>
+								<th>Telefon</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for mieter in mieters %}					 
+							<tr>
+								<td>{{ mieter.nachname }}</td>
+								<td>{{ mieter.vorname }}</td>
+								<td>{{ mieter.strasse }}</td>
+								<td>{{ mieter.plz}}</td>
+								<td>{{ mieter.ort}}</td>
+								<td>{{ mieter.email}}</td>
+								<td>{{ mieter.telefon}}</td>
+								<td>
+									<a href="{{ path('edit_mieter', {'mieter': mieter.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				{% endif %}
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Suche</div>
+					<div class="panel-body">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Liegenschaften</div>
+				{% if houses == false %}
+					<div class="panel-body">
+						<p>Noch keine Liegenschaften vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Strasse</th>
+								<th>PLZ</th>
+								<th>Ort</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for house in houses %}					 
+							<tr>
+								<td>{{ house.name }}</td>
+								<td>{{ house.strasse }}</td>
+								<td>{{ house.plz}}</td>
+								<td>{{ house.ort}}</td>
+								<td>
+									<a href="{{ path('edit_house', {'house': house.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				{% endif %}
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
