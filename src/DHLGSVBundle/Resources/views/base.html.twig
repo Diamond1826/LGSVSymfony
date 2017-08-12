@@ -9,8 +9,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/dhlgsv/lgsv/css/main.css') }}"/>
         {% block head %}{% endblock %}
     </head>
-    <body role="document">
- 
+    <body role="document"> 
         <!-- navbar -->
         <nav class="navbar navbar-default">
             <div class="container">
@@ -23,8 +22,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/">LGSV Plus</a>
-                </div>
- 
+                </div> 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="menu-toggle">
                     <ul class="nav navbar-nav">
@@ -37,17 +35,13 @@
             <!-- /.container-fluid -->
         </nav>
         <!-- /navbar -->
- 
         <div class='container'>
             {% block body %}{% endblock %}
-        </div>
- 
+        </div> 
         {% block javascripts %}
             <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
             <script src="{{ asset('bundles/dhlgsv/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/dhlgsv/lgsv/js/script.js') }}" type="text/javascript"></script>
         {% endblock %}
- 
     </body>
- 
 </html>
