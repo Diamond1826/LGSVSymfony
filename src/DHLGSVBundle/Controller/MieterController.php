@@ -34,10 +34,10 @@ class MieterController extends Controller
      */
     public function newAction(Request $request) {
  
-    	// Erstelle "dummy"-Dvd als Referenz
+    	// Erstelle "dummy"-Mieter als Referenz
     	$mieter = new Mieter();
  
-    	// Erstelle neues Form auf Grundlage des DvdTypes
+    	// Erstelle neues Form auf Grundlage des NieterTypes
     	$form = $this->createForm(MieterType::class, $mieter);
  
     	// Verarbeite Request (falls Formular abgesendet wurde)
@@ -49,10 +49,10 @@ class MieterController extends Controller
     		// Hole den EntityManager 
     		$em = $this->getDoctrine()->getManager();
  
-    		// Gib die Dvd an den EntityManager
+    		// Gib den Mieter an den EntityManager
     		$em->persist($mieter);
  
-    		// Schreibe Dvd in die Datenbank
+    		// Schreibe Mieter in die Datenbank
     		$em->flush();
  
     		// Und leite auf die Startseite weiter
@@ -68,10 +68,10 @@ class MieterController extends Controller
      */
     public function newHouseAction(Request $request) {
  
-        // Erstelle "dummy"-Dvd als Referenz
+        // Erstelle "dummy"-House als Referenz
         $house = new House();
  
-        // Erstelle neues Form auf Grundlage des DvdTypes
+        // Erstelle neues Form auf Grundlage des HouseTypes
         $form = $this->createForm(HouseType::class, $house);
  
         // Verarbeite Request (falls Formular abgesendet wurde)
@@ -83,10 +83,10 @@ class MieterController extends Controller
             // Hole den EntityManager 
             $em = $this->getDoctrine()->getManager();
  
-            // Gib die Dvd an den EntityManager
+            // Gib das House an den EntityManager
             $em->persist($house);
  
-            // Schreibe Dvd in die Datenbank
+            // Schreibe House in die Datenbank
             $em->flush();
  
             // Und leite auf die Startseite weiter
@@ -105,19 +105,19 @@ class MieterController extends Controller
     	// Hole den EntityManager
     	$em = $this->getDoctrine()->getManager();
  
-    	// Hole das DVD Repository
+    	// Hole das Mieter Repository
     	$repository = $em->getRepository('DHLGSVBundle:Mieter');
  
-    	// Suche die DVD anhand der übergebenen ID
+    	// Suche den Mieter anhand der übergebenen ID
     	$mieters = $repository->findOneById($mieter);
  
-    	// Leite auf Startseite wenn die DVD nicht existiert
+    	// Leite auf Startseite wenn der Mieter nicht existiert
     	if(!$mieters) {    	
     		return $this->redirectToRoute('home');
     	}
  
-    	// Erstelle neues Form auf Grundlage des DvdTypes
-    	// Und der gefundenen DVD
+    	// Erstelle neues Form auf Grundlage des MieterTypes
+    	// Und des gefundenen Mieters
     	$form = $this->createForm(MieterType::class, $mieters);
  
     	// Verarbeite Request (falls Formular abgesendet wurde)
@@ -126,10 +126,10 @@ class MieterController extends Controller
     	// Wenn das Formular abgesendet und die Daten gültig sind ...
     	if ($form->isSubmitted() && $form->isValid()) {
  
-    		// Gib die Dvd an den EntityManager
+    		// Gib den Mieter an den EntityManager
     		$em->persist($mieters);
  
-    		// Aktualisere Dvd in der Datenbank
+    		// Aktualisere Mieter in der Datenbank
     		$em->flush();
  
     		// Und leite auf die Startseite weiter
@@ -148,19 +148,19 @@ class MieterController extends Controller
         // Hole den EntityManager
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das DVD Repository
+        // Hole das House Repository
         $repository = $em->getRepository('DHLGSVBundle:House');
  
-        // Suche die DVD anhand der übergebenen ID
+        // Suche das House anhand der übergebenen ID
         $houses = $repository->findOneById($house);
  
-        // Leite auf Startseite wenn die DVD nicht existiert
+        // Leite auf Startseite wenn das House nicht existiert
         if(!$houses) {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des DvdTypes
-        // Und der gefundenen DVD
+        // Erstelle neues Form auf Grundlage des HouseTypes
+        // Und des gefundenen Houses
         $form = $this->createForm(HouseType::class, $houses);
  
         // Verarbeite Request (falls Formular abgesendet wurde)
@@ -169,10 +169,10 @@ class MieterController extends Controller
         // Wenn das Formular abgesendet und die Daten gültig sind ...
         if ($form->isSubmitted() && $form->isValid()) {
  
-            // Gib die Dvd an den EntityManager
+            // Gib das House an den EntityManager
             $em->persist($houses);
  
-            // Aktualisere Dvd in der Datenbank
+            // Aktualisere House in der Datenbank
             $em->flush();
  
             // Und leite auf die Startseite weiter
@@ -191,25 +191,25 @@ class MieterController extends Controller
         // Hole den EntityManager
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das DVD Repository
+        // Hole das House Repository
         $repository = $em->getRepository('DHLGSVBundle:House');
  
-        // Suche die DVD anhand der übergebenen ID
+        // Suche das House anhand der übergebenen ID
         $houses = $repository->findOneById($house);
  
-        // Leite auf Startseite wenn die DVD nicht existiert
+        // Leite auf Startseite wenn das House nicht existiert
         if(!$houses) {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des DvdTypes
-        // Und der gefundenen DVD
+        // Erstelle neues Form auf Grundlage des HouseTypes
+        // Und des gefundenen Houses
         $form = $this->createForm(HouseType::class, $houses);        
  
-            // Gib die Dvd an den EntityManager
+            // Lösche das House
             $em->remove($houses);
  
-            // Aktualisere Dvd in der Datenbank
+            // Aktualisere House in der Datenbank
             $em->flush();
  
             // Und leite auf die Startseite weiter
@@ -225,25 +225,25 @@ class MieterController extends Controller
         // Hole den EntityManager
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das DVD Repository
+        // Hole das Mieter Repository
         $repository = $em->getRepository('DHLGSVBundle:Mieter');
  
-        // Suche die DVD anhand der übergebenen ID
+        // Suche den Mieter anhand der übergebenen ID
         $mieters = $repository->findOneById($mieter);
  
-        // Leite auf Startseite wenn die DVD nicht existiert
+        // Leite auf Startseite wenn der Mieter nicht existiert
         if(!$mieters) {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des DvdTypes
-        // Und der gefundenen DVD
+        // Erstelle neues Form auf Grundlage des MieterTypes
+        // Und des gefundenen Mieters
         $form = $this->createForm(MieterType::class, $mieters);        
  
-            // Gib die Dvd an den EntityManager
+            // Lösche den Mieter
             $em->remove($mieters);
  
-            // Aktualisere Dvd in der Datenbank
+            // Aktualisere Mieter in der Datenbank
             $em->flush();
  
             // Und leite auf die Startseite weiter
