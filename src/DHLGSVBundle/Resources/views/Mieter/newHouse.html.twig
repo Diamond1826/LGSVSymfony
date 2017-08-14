@@ -1,23 +1,7 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% extends 'DHLGSVBundle::base.html.twig' %}
 {% block body %}
 	<h2>Liegenschaft hinzufügen</h2>
 	{{ form_start(form) }}
-		<div class="form-group">
-			<label for="form_name">Name</label>
-			{{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
-		</div>
-		<div class="form-group">
-			<label for="form_strasse">Strasse</label>
-			{{ form_widget(form.strasse, { 'attr': {'class': 'form-control'} }) }}
-		</div>
-		<div class="form-group">
-			<label for="form_plz">PLZ</label>
-			{{ form_widget(form.plz, { 'attr': {'class': 'form-control'} }) }}
-		</div>
-		<div class="form-group">
-			<label for="form_ort">Ort</label>
-			{{ form_widget(form.ort, { 'attr': {'class': 'form-control'} }) }}
-		</div>
-		<button type="submit" class="btn btn-default">Speichern</button>
 	{{ form_end(form) }}	
 {% endblock %}
