@@ -10,6 +10,8 @@ use DHLGSVBundle\Entity\Mieter;
 use DHLGSVBundle\Form\MieterType;
 use DHLGSVBundle\Entity\House;
 use DHLGSVBundle\Form\HouseType;
+use DHLGSVBundle\Entity\Wohnung;
+use DHLGSVBundle\Form\WohnungType;
 
 class MieterController extends Controller
 {
@@ -24,8 +26,14 @@ class MieterController extends Controller
 
         $emH = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:House');
         $houses = $emH->findAll();
+
+        $emW = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:Wohnung');
+        $wohnungen = $emW->findAll();
+
+        $emM = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:MieterToWohnung');
+        $mieterWohnung = $emM->findAll();
  
-        return array('mieters' => $mieters, 'houses' => $houses);
+        return array('mieters' => $mieters, 'houses' => $houses, 'wohnungen' => $wohnungen, 'mieterWohnung' => $mieterWohnung);
     }
 
 	 /**
@@ -85,6 +93,40 @@ class MieterController extends Controller
  
             // Gib das House an den EntityManager
             $em->persist($house);
+ 
+            // Schreibe House in die Datenbank
+            $em->flush();
+ 
+            // Und leite auf die Startseite weiter
+            return $this->redirectToRoute('home');
+        }
+ 
+        return array('form' => $form->createView());
+    }
+
+    /**
+     * @Route("/wohnung/add", name="new_wohnung")
+     * @Template()
+     */
+    public function newWohnungAction(Request $request) {
+ 
+        // Erstelle "dummy"-House als Referenz
+        $wohnung = new Wohnung();
+ 
+        // Erstelle neues Form auf Grundlage des HouseTypes
+        $form = $this->createForm(WohnungType::class, $wohnung);
+ 
+        // Verarbeite Request (falls Formular abgesendet wurde)
+        $form->handleRequest($request);
+ 
+        // Wenn das Formular abgesendet und die Daten gültig sind ...
+        if ($form->isSubmitted() && $form->isValid()) {
+ 
+            // Hole den EntityManager 
+            $em = $this->getDoctrine()->getManager();
+ 
+            // Gib das House an den EntityManager
+            $em->persist($wohnung);
  
             // Schreibe House in die Datenbank
             $em->flush();

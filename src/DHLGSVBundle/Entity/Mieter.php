@@ -3,6 +3,8 @@
 namespace DHLGSVBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Mieter
@@ -69,6 +71,27 @@ class Mieter
      * @ORM\Column(name="telefon", type="string", length=255)
      */
     private $telefon;
+
+    // ...
+    /**
+     * One Product has Many Features.
+     * @OneToMany(targetEntity="MieterToWohnung", mappedBy="mieter")
+     */
+    private $wohnungen;
+    // ...
+
+    public function __construct() {
+        $this->wohnungen = new ArrayCollection();
+    }
+
+    /**
+    * Get wohnungen
+    * @return arrayCollection
+    */
+    public function getWohnungen()
+    {
+        return $this->wohnungen;
+    }
 
 
     /**

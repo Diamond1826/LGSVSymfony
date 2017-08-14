@@ -113,4 +113,111 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Suche Wohnung</div>
+					<div class="panel-body">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">Suchen</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Wohnungen</div>
+				{% if wohnungen == false %}
+					<div class="panel-body">
+						<p>Noch keine Wohnung vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<th>Liegenschaft ID</th>
+								<th>Name</th>
+								<th>Miete</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for wohnung in wohnungen %}					 
+							<tr>
+								<td>{{ wohnung.house.strasse }}</td>
+								<td>{{ wohnung.name }}</td>
+								<td>{{ wohnung.miete}}</td>								
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Suche Wohnung</div>
+					<div class="panel-body">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">Suchen</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Wohnungen und Mieter</div>
+				{% if mieterWohnung == false %}
+					<div class="panel-body">
+						<p>Noch keine Wohnungen mit Mieter vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<th>Wohnungs ID</th>
+								<th>Wohnungsname</th>
+								<th>Miete</th>
+								<th>Mieter ID</th>
+								<th>Nachname</th>
+								<th>Vorname</th>
+								<th>Telefon</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for mieter in mieterWohnung %}					 
+							<tr>
+								<td>{{ mieter.wohnung.id }}</td>
+								<td>{{ mieter.wohnung.name }}</td>
+								<td>{{ mieter.wohnung.miete}}</td>
+								<td>{{ mieter.mieter.id }}</td>
+								<td>{{ mieter.mieter.nachname }}</td>
+								<td>{{ mieter.mieter.vorname}}</td>
+								<td>{{ mieter.mieter.telefon}}</td>								
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
