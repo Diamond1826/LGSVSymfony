@@ -23,17 +23,15 @@ class MieterController extends Controller
      */
     public function indexAction()
     {
-    	$em = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:Mieter');
-    	$mieters = $em->findAll();
+    	$em = $this->getDoctrine()->getManager();
 
-        $emH = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:House');
-        $houses = $emH->findAll();
+    	$mieters = $em->getRepository('DHLGSVBundle:Mieter')->findAll();
 
-        $emW = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:Wohnung');
-        $wohnungen = $emW->findAll();
+        $houses = $em->getRepository('DHLGSVBundle:House')->findAll();
 
-        $emM = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:MieterToWohnung');
-        $mietertowohnungen = $emM->findAll();
+        $wohnungen = $em->getRepository('DHLGSVBundle:Wohnung')->findAll();
+
+        $mietertowohnungen = $em->getRepository('DHLGSVBundle:MieterToWohnung')->findAll();
  
         return array('mieters' => $mieters, 'houses' => $houses, 'wohnungen' => $wohnungen, 'mietertowohnungen' => $mietertowohnungen);
     }
@@ -44,11 +42,11 @@ class MieterController extends Controller
      */
     public function viewWohnungenAction($house)
     {
-        $emW = $this->getDoctrine()->getManager()->getRepository(Wohnung::class);
-        $wohnungen = $emW->findBy(array('house' => $house));
+        $em = $this->getDoctrine()->getManager();
+        
+        $wohnungen = $em->getRepository(Wohnung::class)->findBy(array('house' => $house));
 
-        $emM = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:MieterToWohnung');
-        $mietertowohnungen = $emM->findBy(array('wohnung' => $wohnungen));
+        $mietertowohnungen = $em->getRepository('DHLGSVBundle:MieterToWohnung')->findBy(array('wohnung' => $wohnungen));
  
         return array('wohnungen' => $wohnungen, 'mietertowohnungen' => $mietertowohnungen);
     }
@@ -59,8 +57,9 @@ class MieterController extends Controller
      */
     public function viewWohnungenMieterAction($mieter)
     {
-        $emW = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:Mieter');
-        $mieters = $emW->findOneById($mieter);
+        $em = $this->getDoctrine()->getManager();
+
+        $mieters = $em->getRepository('DHLGSVBundle:Mieter')->findOneById($mieter);
  
         return array('mieters' => $mieters);
     }
@@ -69,30 +68,22 @@ class MieterController extends Controller
      * @Route("/mieter/add", name="new_mieter")
      * @Template()
      */
-    public function newAction(Request $request) {
- 
-    	// Erstelle "dummy"-Mieter als Referenz
+    public function newAction(Request $request) 
+    { 
     	$mieter = new Mieter();
  
-    	// Erstelle neues Form auf Grundlage des NieterTypes
     	$form = $this->createForm(MieterType::class, $mieter);
  
-    	// Verarbeite Request (falls Formular abgesendet wurde)
     	$form->handleRequest($request);
  
-    	// Wenn das Formular abgesendet und die Daten gültig sind ...
-    	if ($form->isSubmitted() && $form->isValid()) {
- 
-    		// Hole den EntityManager 
+    	if ($form->isSubmitted() && $form->isValid()) 
+        { 
     		$em = $this->getDoctrine()->getManager();
  
-    		// Gib den Mieter an den EntityManager
     		$em->persist($mieter);
  
-    		// Schreibe Mieter in die Datenbank
     		$em->flush();
  
-    		// Und leite auf die Startseite weiter
     		return $this->redirectToRoute('home');
     	}
  
@@ -103,8 +94,8 @@ class MieterController extends Controller
      * @Route("/house/add", name="new_house")
      * @Template()
      */
-    public function newHouseAction(Request $request) {
- 
+    public function newHouseAction(Request $request) 
+    { 
         // Erstelle "dummy"-House als Referenz
         $house = new House();
  
@@ -115,8 +106,8 @@ class MieterController extends Controller
         $form->handleRequest($request);
  
         // Wenn das Formular abgesendet und die Daten gültig sind ...
-        if ($form->isSubmitted() && $form->isValid()) {
- 
+        if ($form->isSubmitted() && $form->isValid()) 
+        { 
             // Hole den EntityManager 
             $em = $this->getDoctrine()->getManager();
  
@@ -137,30 +128,22 @@ class MieterController extends Controller
      * @Route("/mietertowohnung/add", name="new_mietertowohnung")
      * @Template()
      */
-    public function newMieterToWohnungAction(Request $request) {
- 
-        // Erstelle "dummy"-House als Referenz
+    public function newMieterToWohnungAction(Request $request) 
+    {
         $mietertowohnung = new MieterToWohnung();
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
         $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);
  
-        // Verarbeite Request (falls Formular abgesendet wurde)
         $form->handleRequest($request);
  
-        // Wenn das Formular abgesendet und die Daten gültig sind ...
-        if ($form->isSubmitted() && $form->isValid()) {
- 
-            // Hole den EntityManager 
+        if ($form->isSubmitted() && $form->isValid()) 
+        { 
             $em = $this->getDoctrine()->getManager();
  
-            // Gib das House an den EntityManager
             $em->persist($mietertowohnung);
  
-            // Schreibe House in die Datenbank
             $em->flush();
  
-            // Und leite auf die Startseite weiter
             return $this->redirectToRoute('home');
         }
  
@@ -171,30 +154,22 @@ class MieterController extends Controller
      * @Route("/wohnung/add", name="new_wohnung")
      * @Template()
      */
-    public function newWohnungAction(Request $request) {
- 
-        // Erstelle "dummy"-House als Referenz
+    public function newWohnungAction(Request $request) 
+    { 
         $wohnung = new Wohnung();
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
         $form = $this->createForm(WohnungType::class, $wohnung);
  
-        // Verarbeite Request (falls Formular abgesendet wurde)
         $form->handleRequest($request);
  
-        // Wenn das Formular abgesendet und die Daten gültig sind ...
-        if ($form->isSubmitted() && $form->isValid()) {
- 
-            // Hole den EntityManager 
+        if ($form->isSubmitted() && $form->isValid()) 
+        { 
             $em = $this->getDoctrine()->getManager();
  
-            // Gib das House an den EntityManager
             $em->persist($wohnung);
  
-            // Schreibe House in die Datenbank
             $em->flush();
  
-            // Und leite auf die Startseite weiter
             return $this->redirectToRoute('home');
         }
  
@@ -205,39 +180,29 @@ class MieterController extends Controller
      * @Route("/mieter/edit/{mieter}", name="edit_mieter")
      * @Template()
      */
-    public function editAction(Request $request, $mieter) {
- 
-    	// Hole den EntityManager
+    public function editAction(Request $request, $mieter) 
+    {
     	$em = $this->getDoctrine()->getManager();
  
-    	// Hole das Mieter Repository
     	$repository = $em->getRepository('DHLGSVBundle:Mieter');
  
-    	// Suche den Mieter anhand der übergebenen ID
     	$mieters = $repository->findOneById($mieter);
  
-    	// Leite auf Startseite wenn der Mieter nicht existiert
-    	if(!$mieters) {    	
+    	if(!$mieters) 
+        {    	
     		return $this->redirectToRoute('home');
     	}
  
-    	// Erstelle neues Form auf Grundlage des MieterTypes
-    	// Und des gefundenen Mieters
     	$form = $this->createForm(MieterType::class, $mieters);
  
-    	// Verarbeite Request (falls Formular abgesendet wurde)
     	$form->handleRequest($request);
  
-    	// Wenn das Formular abgesendet und die Daten gültig sind ...
-    	if ($form->isSubmitted() && $form->isValid()) {
- 
-    		// Gib den Mieter an den EntityManager
+    	if ($form->isSubmitted() && $form->isValid()) 
+        { 
     		$em->persist($mieters);
  
-    		// Aktualisere Mieter in der Datenbank
     		$em->flush();
  
-    		// Und leite auf die Startseite weiter
     		return $this->redirectToRoute('home');
     	}
  
@@ -248,8 +213,8 @@ class MieterController extends Controller
      * @Route("/house/edit/{house}", name="edit_house")
      * @Template()
      */
-    public function editHouseAction(Request $request, $house) {
- 
+    public function editHouseAction(Request $request, $house) 
+    { 
         // Hole den EntityManager
         $em = $this->getDoctrine()->getManager();
  
@@ -260,7 +225,8 @@ class MieterController extends Controller
         $houses = $repository->findOneById($house);
  
         // Leite auf Startseite wenn das House nicht existiert
-        if(!$houses) {     
+        if(!$houses) 
+        {     
             return $this->redirectToRoute('home');
         }
  
@@ -272,8 +238,8 @@ class MieterController extends Controller
         $form->handleRequest($request);
  
         // Wenn das Formular abgesendet und die Daten gültig sind ...
-        if ($form->isSubmitted() && $form->isValid()) {
- 
+        if ($form->isSubmitted() && $form->isValid()) 
+        { 
             // Gib das House an den EntityManager
             $em->persist($houses);
  
@@ -291,39 +257,29 @@ class MieterController extends Controller
      * @Route("/wohnung/edit/{wohnung}", name="edit_wohnung")
      * @Template()
      */
-    public function editWohnungAction(Request $request, $wohnung) {
- 
-        // Hole den EntityManager
+    public function editWohnungAction(Request $request, $wohnung) 
+    { 
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das House Repository
         $repository = $em->getRepository('DHLGSVBundle:Wohnung');
  
-        // Suche das House anhand der übergebenen ID
         $wohnungen = $repository->findOneById($wohnung);
  
-        // Leite auf Startseite wenn das House nicht existiert
-        if(!$wohnungen) {     
+        if(!$wohnungen) 
+        {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
-        // Und des gefundenen Houses
         $form = $this->createForm(WohnungType::class, $wohnungen);
  
-        // Verarbeite Request (falls Formular abgesendet wurde)
         $form->handleRequest($request);
  
-        // Wenn das Formular abgesendet und die Daten gültig sind ...
-        if ($form->isSubmitted() && $form->isValid()) {
- 
-            // Gib das House an den EntityManager
+        if ($form->isSubmitted() && $form->isValid()) 
+        { 
             $em->persist($wohnungen);
  
-            // Aktualisere House in der Datenbank
             $em->flush();
  
-            // Und leite auf die Startseite weiter
             return $this->redirectToRoute('home');
         }
  
@@ -334,39 +290,29 @@ class MieterController extends Controller
      * @Route("/mietertowohnung/edit/{mietertowohnung}", name="edit_mietertowohnung")
      * @Template()
      */
-    public function editMieterToWohnungAction(Request $request, $mietertowohnung) {
- 
-        // Hole den EntityManager
+    public function editMieterToWohnungAction(Request $request, $mietertowohnung) 
+    { 
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das House Repository
         $repository = $em->getRepository('DHLGSVBundle:MieterToWohnung');
  
-        // Suche das House anhand der übergebenen ID
         $mietertowohnungen = $repository->findOneById($mietertowohnung);
  
-        // Leite auf Startseite wenn das House nicht existiert
-        if(!$mietertowohnungen) {     
+        if(!$mietertowohnungen) 
+        {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
-        // Und des gefundenen Houses
         $form = $this->createForm(MieterToWohnungType::class, $mietertowohnungen);
  
-        // Verarbeite Request (falls Formular abgesendet wurde)
         $form->handleRequest($request);
  
-        // Wenn das Formular abgesendet und die Daten gültig sind ...
-        if ($form->isSubmitted() && $form->isValid()) {
- 
-            // Gib das House an den EntityManager
+        if ($form->isSubmitted() && $form->isValid()) 
+        { 
             $em->persist($mietertowohnungen);
- 
-            // Aktualisere House in der Datenbank
+
             $em->flush();
  
-            // Und leite auf die Startseite weiter
             return $this->redirectToRoute('home');
         }
  
@@ -377,8 +323,8 @@ class MieterController extends Controller
      * @Route("/house/delete/{house}", name="delete_house")
      * @Template()
      */
-    public function deleteHouseAction($house) {
- 
+    public function deleteHouseAction($house) 
+    { 
         // Hole den EntityManager
         $em = $this->getDoctrine()->getManager();
  
@@ -389,123 +335,148 @@ class MieterController extends Controller
         $houses = $repository->findOneById($house);
  
         // Leite auf Startseite wenn das House nicht existiert
-        if(!$houses) {     
+        if(!$houses) 
+        {     
             return $this->redirectToRoute('home');
         }
- 
+        
+        $wohnungen = $em->getRepository(Wohnung::class)->findBy(array('house' => $house));
+
+        $mietertowohnungen = $em->getRepository(MieterToWohnung::class)->findBy(array('wohnung' => $wohnungen));
+
+        foreach ($mietertowohnungen as $mietertowohnung) 
+        {
+            $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);        
+     
+            // Lösche mietertowohnung
+            $em->remove($mietertowohnung);
+    
+            // Aktualisere mietertowohnung in der Datenbank
+            $em->flush();
+        }
+
+        foreach ($wohnungen as $wohnung) 
+        {
+            $form = $this->createForm(WohnungType::class, $wohnung);        
+     
+            // Lösche die wohnung
+            $em->remove($wohnung);
+    
+            // Aktualisere Wohnung in der Datenbank
+            $em->flush();
+        }
+
         // Erstelle neues Form auf Grundlage des HouseTypes
         // Und des gefundenen Houses
         $form = $this->createForm(HouseType::class, $houses);        
  
-            // Lösche das House
-            $em->remove($houses);
+        // Lösche das House
+        $em->remove($houses);
  
-            // Aktualisere House in der Datenbank
-            $em->flush();
+        // Aktualisere House in der Datenbank
+        $em->flush();
  
-            // Und leite auf die Startseite weiter
-            return $this->redirectToRoute('home');
+        // Und leite auf die Startseite weiter
+        return $this->redirectToRoute('home');
     }
 
     /**
      * @Route("/wohnung/delete/{wohnung}", name="delete_wohnung")
      * @Template()
      */
-    public function deleteWohnungAction($wohnung) {
- 
-        // Hole den EntityManager
+    public function deleteWohnungAction($wohnung) 
+    { 
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das House Repository
         $repository = $em->getRepository('DHLGSVBundle:Wohnung');
  
-        // Suche das House anhand der übergebenen ID
         $wohnungen = $repository->findOneById($wohnung);
  
-        // Leite auf Startseite wenn das House nicht existiert
-        if(!$wohnungen) {     
+        if(!$wohnungen) 
+        {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
-        // Und des gefundenen Houses
+        $mietertowohnungen = $em->getRepository(MieterToWohnung::class)->findBy(array('wohnung' => $wohnung));
+
+        foreach ($mietertowohnungen as $mietertowohnung) 
+        {
+            $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);        
+     
+            $em->remove($mietertowohnung);
+     
+            $em->flush();
+        }
+
         $form = $this->createForm(WohnungType::class, $wohnungen);        
  
-            // Lösche das House
-            $em->remove($wohnungen);
+        $em->remove($wohnungen);
  
-            // Aktualisere House in der Datenbank
-            $em->flush();
+        $em->flush();
  
-            // Und leite auf die Startseite weiter
-            return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home');
     }
 
     /**
      * @Route("/mietertowohnung/delete/{mietertowohnung}", name="delete_mietertowohnung")
      * @Template()
      */
-    public function deleteMieterToWohnungAction($mietertowohnung) {
- 
-        // Hole den EntityManager
+    public function deleteMieterToWohnungAction($mietertowohnung) 
+    { 
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das House Repository
         $repository = $em->getRepository('DHLGSVBundle:MieterToWohnung');
  
-        // Suche das House anhand der übergebenen ID
         $mietertowohnungen = $repository->findOneById($mietertowohnung);
  
-        // Leite auf Startseite wenn das House nicht existiert
-        if(!$mietertowohnungen) {     
+        if(!$mietertowohnungen) 
+        {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
-        // Und des gefundenen Houses
         $form = $this->createForm(MieterToWohnungType::class, $mietertowohnungen);        
  
-            // Lösche das House
-            $em->remove($mietertowohnungen);
+        $em->remove($mietertowohnungen);
  
-            // Aktualisere House in der Datenbank
-            $em->flush();
+        $em->flush();
  
-            // Und leite auf die Startseite weiter
-            return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home');
     }
 
     /**
      * @Route("/mieter/delete/{mieter}", name="delete_mieter")
      * @Template()
      */
-    public function deleteAction($mieter) {
- 
-        // Hole den EntityManager
+    public function deleteAction($mieter) 
+    { 
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das Mieter Repository
         $repository = $em->getRepository('DHLGSVBundle:Mieter');
  
-        // Suche den Mieter anhand der übergebenen ID
         $mieters = $repository->findOneById($mieter);
  
-        // Leite auf Startseite wenn der Mieter nicht existiert
-        if(!$mieters) {     
+        if(!$mieters) 
+        {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des MieterTypes
-        // Und des gefundenen Mieters
+        $mietertowohnungen = $em->getRepository(MieterToWohnung::class)->findBy(array('mieter' => $mieter));
+
+        foreach ($mietertowohnungen as $mietertowohnung) 
+        {
+            $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);        
+     
+            $em->remove($mietertowohnung);
+     
+            $em->flush();
+        }
+
         $form = $this->createForm(MieterType::class, $mieters);        
  
-            // Lösche den Mieter
-            $em->remove($mieters);
+        $em->remove($mieters);
  
-            // Aktualisere Mieter in der Datenbank
-            $em->flush();
+        $em->flush();
  
-            // Und leite auf die Startseite weiter
-            return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home');    
     }    
 }

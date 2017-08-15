@@ -3,21 +3,6 @@
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Suche Wohnung</div>
-					<div class="panel-body">
-					<div class="input-group">
-						<input type="text" class="form-control">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="button">Suchen</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">			
-		<div class="col-md-12">
-			<div class="panel panel-default">
 				<div class="panel-heading">Wohnungen</div>
 				{% if wohnungen is empty %}
 					<div class="panel-body">
@@ -25,7 +10,7 @@
 					</div>
 				{% else %}
 				<div class="panel-body">
-					<table class="table table-responsive table-hover">
+					<table class="table table-responsive">
 						<thead>
 							<tr>
 								<th>Liegenschaft ID</th>
@@ -50,22 +35,6 @@
 					</table>
 				</div>
 				{% endif %}
-			</div>
-		</div>
-	</div>
-
-	<div class="row">			
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">Suche Wohnung mit Mieter</div>
-					<div class="panel-body">
-					<div class="input-group">
-						<input type="text" class="form-control">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="button">Suchen</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

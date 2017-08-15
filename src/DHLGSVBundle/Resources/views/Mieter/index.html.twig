@@ -18,7 +18,7 @@
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Mieter</div>
+				<div class="panel-heading">Mieter<br><i>Klicke auf einen Eintrag um alle Wohnungen des gewählten Mieter's einzusehen</i></div>
 				{% if mieters is empty %}
 					<div class="panel-body">
 						<p>Noch keine Mieter vorhanden</p>
@@ -59,7 +59,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
@@ -78,7 +77,7 @@
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Liegenschaften</div>
+				<div class="panel-heading">Liegenschaften<br><i>Klicke auf einen Eintrag um alle Wohnungen und Mieter des gewählten Hauses einzusehen</i></div>
 				{% if houses is empty %}
 					<div class="panel-body">
 						<p>Noch keine Liegenschaften vorhanden</p>
@@ -96,7 +95,7 @@
 						</thead>
 						<tbody>
 						{% for house in houses %}					 
-							<tr class="clickable-row" data-href="{{ path('view_wohnungen', {'house': house.id}) }}">
+							<tr class="clickable-row" data-href="{{ path('view_wohnungen', {'house': house.id},{ 'street': house.strasse}) }}">
 								<td>{{ house.name }}</td>
 								<td>{{ house.strasse }}</td>
 								<td>{{ house.plz}}</td>
@@ -113,8 +112,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
@@ -133,7 +130,7 @@
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Wohnungen</div>
+				<div class="panel-heading">Wohnungen<br><i>Klicke auf einen Eintrag um alle Mieter der gewählten Wohnung einzusehen</i></div>
 				{% if wohnungen is empty %}
 					<div class="panel-body">
 						<p>Noch keine Wohnung vorhanden</p>
@@ -166,7 +163,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
