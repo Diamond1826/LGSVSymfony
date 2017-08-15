@@ -38,6 +38,33 @@ class MieterController extends Controller
         return array('mieters' => $mieters, 'houses' => $houses, 'wohnungen' => $wohnungen, 'mietertowohnungen' => $mietertowohnungen);
     }
 
+    /**
+     * @Route("/wohnungen/view/{house}", name="view_wohnungen")
+     * @Template()
+     */
+    public function viewWohnungenAction($house)
+    {
+        $emW = $this->getDoctrine()->getManager()->getRepository(Wohnung::class);
+        $wohnungen = $emW->findBy(array('house' => $house));
+
+        $emM = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:MieterToWohnung');
+        $mietertowohnungen = $emM->findBy(array('wohnung' => $wohnungen));
+ 
+        return array('wohnungen' => $wohnungen, 'mietertowohnungen' => $mietertowohnungen);
+    }
+
+    /**
+     * @Route("/wohnungenmieter/view/{mieter}", name="view_wohnungenmieter")
+     * @Template()
+     */
+    public function viewWohnungenMieterAction($mieter)
+    {
+        $emW = $this->getDoctrine()->getManager()->getRepository('DHLGSVBundle:Mieter');
+        $mieters = $emW->findOneById($mieter);
+ 
+        return array('mieters' => $mieters);
+    }
+
 	 /**
      * @Route("/mieter/add", name="new_mieter")
      * @Template()

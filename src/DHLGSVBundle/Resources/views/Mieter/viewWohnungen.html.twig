@@ -1,0 +1,116 @@
+{% extends 'DHLGSVBundle::base.html.twig' %}
+{% block body %}
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Suche Wohnung</div>
+					<div class="panel-body">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">Suchen</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Wohnungen</div>
+				{% if wohnungen is empty %}
+					<div class="panel-body">
+						<p>Noch keine Wohnung vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+					<table class="table table-responsive table-hover">
+						<thead>
+							<tr>
+								<th>Liegenschaft ID</th>
+								<th>Wohnung ID</th>
+								<th>Name</th>
+								<th>Miete</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for wohnung in wohnungen %}					 
+							<tr>
+								<td>{{ wohnung.house.strasse }}</td>
+								<td>{{ wohnung.id }}</td>
+								<td>{{ wohnung.name }}</td>
+								<td>{{ wohnung.miete}} CHF</td>
+								<td>
+									<a href="{{ path('edit_wohnung', {'wohnung': wohnung.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>								
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Suche Wohnung mit Mieter</div>
+					<div class="panel-body">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">Suchen</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Mieter</div>
+				{% if mietertowohnungen is empty %}
+					<div class="panel-body">
+						<p>Noch keine Mieter vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<th>Wohnungs ID</th>
+								<th>Wohnungsname</th>
+								<th>Miete</th>
+								<th>Mieter ID</th>
+								<th>Nachname</th>
+								<th>Vorname</th>
+								<th>Telefon</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for mietertowohnung in mietertowohnungen %}					 
+							<tr>
+								<td>{{ mietertowohnung.wohnung.id }}</td>
+								<td>{{ mietertowohnung.wohnung.name }}</td>
+								<td>{{ mietertowohnung.wohnung.miete}} CHF</td>
+								<td>{{ mietertowohnung.mieter.id }}</td>
+								<td>{{ mietertowohnung.mieter.nachname }}</td>
+								<td>{{ mietertowohnung.mieter.vorname}}</td>
+								<td>{{ mietertowohnung.mieter.telefon}}</td>	
+								<td>
+									<a href="{{ path('edit_mietertowohnung', {'mietertowohnung': mietertowohnung.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>							
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

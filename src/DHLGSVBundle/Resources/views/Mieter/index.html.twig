@@ -19,13 +19,13 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Mieter</div>
-				{% if mieters == false %}
+				{% if mieters is empty %}
 					<div class="panel-body">
 						<p>Noch keine Mieter vorhanden</p>
 					</div>
 				{% else %}
 				<div class="panel-body">
-					<table class="table table-responsive">
+					<table class="table table-responsive table-hover">
 						<thead>
 							<tr>
 								<th>Nachname</th>
@@ -39,7 +39,7 @@
 						</thead>
 						<tbody>
 						{% for mieter in mieters %}					 
-							<tr>
+							<tr class="clickable-row" data-href="{{ path('view_wohnungenmieter', {'mieter': mieter.id}) }}">
 								<td>{{ mieter.nachname }}</td>
 								<td>{{ mieter.vorname }}</td>
 								<td>{{ mieter.strasse }}</td>
@@ -54,8 +54,8 @@
 						{% endfor %}
 					</tbody>
 					</table>
-				{% endif %}
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -79,13 +79,13 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Liegenschaften</div>
-				{% if houses == false %}
+				{% if houses is empty %}
 					<div class="panel-body">
 						<p>Noch keine Liegenschaften vorhanden</p>
 					</div>
 				{% else %}
 				<div class="panel-body">
-					<table class="table table-responsive">
+					<table class="table table-responsive table-hover">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -96,7 +96,7 @@
 						</thead>
 						<tbody>
 						{% for house in houses %}					 
-							<tr>
+							<tr class="clickable-row" data-href="{{ path('view_wohnungen', {'house': house.id}) }}">
 								<td>{{ house.name }}</td>
 								<td>{{ house.strasse }}</td>
 								<td>{{ house.plz}}</td>
@@ -108,8 +108,8 @@
 						{% endfor %}
 					</tbody>
 					</table>
-				{% endif %}
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -134,7 +134,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Wohnungen</div>
-				{% if wohnungen == false %}
+				{% if wohnungen is empty %}
 					<div class="panel-body">
 						<p>Noch keine Wohnung vorhanden</p>
 					</div>
@@ -161,8 +161,8 @@
 						{% endfor %}
 					</tbody>
 					</table>
-				{% endif %}
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -186,7 +186,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Wohnungen und Mieter</div>
-				{% if mietertowohnungen == false %}
+				{% if mietertowohnungen is empty %}
 					<div class="panel-body">
 						<p>Noch keine Wohnungen mit Mieter vorhanden</p>
 					</div>
@@ -221,8 +221,8 @@
 						{% endfor %}
 					</tbody>
 					</table>
-				{% endif %}
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
