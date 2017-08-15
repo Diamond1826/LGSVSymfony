@@ -140,7 +140,7 @@
 					</div>
 				{% else %}
 				<div class="panel-body">
-					<table class="table table-responsive">
+					<table class="table table-responsive table-hover">
 						<thead>
 							<tr>
 								<th>Liegenschaft ID</th>
@@ -153,7 +153,10 @@
 							<tr>
 								<td>{{ wohnung.house.strasse }}</td>
 								<td>{{ wohnung.name }}</td>
-								<td>{{ wohnung.miete}}</td>								
+								<td>{{ wohnung.miete}} CHF</td>
+								<td>
+									<a href="{{ path('edit_wohnung', {'wohnung': wohnung.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>								
 							</tr>
 						{% endfor %}
 					</tbody>
@@ -167,7 +170,7 @@
 	<div class="row">			
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Suche Wohnung</div>
+				<div class="panel-heading">Suche Wohnung mit Mieter</div>
 					<div class="panel-body">
 					<div class="input-group">
 						<input type="text" class="form-control">
@@ -183,7 +186,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Wohnungen und Mieter</div>
-				{% if mieterWohnung == false %}
+				{% if mietertowohnungen == false %}
 					<div class="panel-body">
 						<p>Noch keine Wohnungen mit Mieter vorhanden</p>
 					</div>
@@ -202,15 +205,18 @@
 							</tr>
 						</thead>
 						<tbody>
-						{% for mieter in mieterWohnung %}					 
+						{% for mietertowohnung in mietertowohnungen %}					 
 							<tr>
-								<td>{{ mieter.wohnung.id }}</td>
-								<td>{{ mieter.wohnung.name }}</td>
-								<td>{{ mieter.wohnung.miete}}</td>
-								<td>{{ mieter.mieter.id }}</td>
-								<td>{{ mieter.mieter.nachname }}</td>
-								<td>{{ mieter.mieter.vorname}}</td>
-								<td>{{ mieter.mieter.telefon}}</td>								
+								<td>{{ mietertowohnung.wohnung.id }}</td>
+								<td>{{ mietertowohnung.wohnung.name }}</td>
+								<td>{{ mietertowohnung.wohnung.miete}} CHF</td>
+								<td>{{ mietertowohnung.mieter.id }}</td>
+								<td>{{ mietertowohnung.mieter.nachname }}</td>
+								<td>{{ mietertowohnung.mieter.vorname}}</td>
+								<td>{{ mietertowohnung.mieter.telefon}}</td>	
+								<td>
+									<a href="{{ path('edit_mietertowohnung', {'mietertowohnung': mietertowohnung.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>							
 							</tr>
 						{% endfor %}
 					</tbody>

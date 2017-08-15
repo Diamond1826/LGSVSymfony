@@ -72,6 +72,12 @@ class House
         return $this->wohnungen;
     }
 
+     public function setWohnungen($wohnung)
+    {
+        $this->wohnungen = $wohnung;
+        return $this;
+    }
+
     /**
      * Get id
      *

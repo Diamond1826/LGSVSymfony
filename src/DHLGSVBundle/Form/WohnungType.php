@@ -18,6 +18,7 @@ class WohnungType extends AbstractType
         $builder->add('house', EntityType::class, array(
             'class' => 'DHLGSVBundle:House',
             'choice_label' => 'strasse',
+            'label' => 'Liegenschaft',
             'expanded' => false,
             'multiple' => false,
 

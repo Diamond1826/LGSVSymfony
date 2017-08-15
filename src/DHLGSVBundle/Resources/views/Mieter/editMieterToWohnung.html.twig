@@ -1,0 +1,8 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% extends 'DHLGSVBundle::base.html.twig' %}
+{% block body %}
+<h2>Mieter Zuweisung bearbeiten</h2>
+	{{ form_start(form) }}
+	{{ form_end(form) }}
+	<a class="btn btn-default" href="{{ path('delete_mietertowohnung', {'mietertowohnung' : mietertowohnung}) }}">Löschen</a></li>	
+{% endblock %}

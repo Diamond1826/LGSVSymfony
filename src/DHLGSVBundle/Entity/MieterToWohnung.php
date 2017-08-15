@@ -3,6 +3,7 @@
 namespace DHLGSVBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
@@ -60,7 +61,7 @@ class MieterToWohnung
      * @param mieterId
      * @return mieter
      */
-    public function setMieter($mieterId)
+    public function setMieter($mieter)
     {
         $this->mieter = $mieter;
 
@@ -83,7 +84,7 @@ class MieterToWohnung
      * @param wohnungId
      * @return wohnung
      */
-    public function setWohnung($wohnungId)
+    public function setWohnung($wohnung)
     {
         $this->wohnung = $wohnung;
 

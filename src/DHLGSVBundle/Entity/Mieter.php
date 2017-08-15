@@ -93,7 +93,6 @@ class Mieter
         return $this->wohnungen;
     }
 
-
     /**
      * Get id
      *
@@ -148,6 +147,16 @@ class Mieter
     public function getNachname()
     {
         return $this->nachname;
+    }
+
+    /**
+     * Get nachname vorname
+     *
+     * @return string 
+     */
+    public function getIdNachnameVorname()
+    {
+        return "ID:".$this->id."  ".$this->nachname.", ".$this->vorname;
     }
 
     /**
