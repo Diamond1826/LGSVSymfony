@@ -31,6 +31,15 @@
                         <li><a href="{{ path('new_wohnung') }}">Wohnung hinzufügen</a></li>
                         <li><a href="{{ path('new_mietertowohnung') }}">Mieter zuweisen</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                            <li><p class="navbar-text">Angemeldet als: <b>{{ app.user.username }}</b></p></li>
+                            <li><a href="{{ path('logout') }}">
+                                <span class="glyphicon glyphicon-log-out"></span>Logout
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
