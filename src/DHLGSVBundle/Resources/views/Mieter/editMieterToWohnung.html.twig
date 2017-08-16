@@ -4,5 +4,24 @@
 <h2>Mieter Zuweisung bearbeiten</h2>
 	{{ form_start(form) }}
 	{{ form_end(form) }}
-	<a class="btn btn-default" href="{{ path('delete_mietertowohnung', {'mietertowohnung' : mietertowohnung}) }}">Löschen</a></li>	
+
+	<a class="btn btn-default" data-toggle="modal" data-target="#delete-dialog">Löschen</a></li>	
+
+	<div id="delete-dialog" class="modal fade in">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4>Zuweisung löschen</h4>
+        </div>
+        <div class="modal-body">
+          <p>Möchten Sie diese Zuweisung wirklich löschen?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+          <a href="{{ path('delete_mietertowohnung', {'mietertowohnung' : mietertowohnung}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Löschen</a>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
