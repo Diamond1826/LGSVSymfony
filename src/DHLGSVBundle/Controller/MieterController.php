@@ -65,6 +65,19 @@ class MieterController extends Controller
         return array('mieters' => $mieters);
     }
 
+    /**
+     * @Route("/mieter/view/{wohnung}", name="view_mieter")
+     * @Template()
+     */
+    public function viewMieterAction($wohnung)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $wohnungen = $em->getRepository('DHLGSVBundle:MieterToWohnung')->findBy(array('wohnung' => $wohnung));;
+ 
+        return array('wohnungen' => $wohnungen);
+    }
+
 	 /**
      * @Route("/mieter/add", name="new_mieter")
      * @Template()

@@ -1,0 +1,46 @@
+{% extends 'DHLGSVBundle::base.html.twig' %}
+{% block body %}
+	<div class="row">			
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading"><span class="pHeadText">Mieter</span></div>
+				{% if wohnungen is empty %}
+					<div class="panel-body">
+						<p>Noch keine Mieter vorhanden</p>
+					</div>
+				{% else %}
+				<div class="panel-body">
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<th>Nachname</th>
+								<th>Vorname</th>
+								<th>Strasse</th>
+								<th>PLZ</th>
+								<th>Ort</th>
+								<th>E-Mail</th>
+								<th>Telefon</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for mieter in wohnungen %}					 
+							<tr>
+								<td>{{ mieter.mieter.nachname }}</td>
+								<td>{{ mieter.mieter.vorname }}</td>
+								<td>{{ mieter.mieter.strasse }}</td>
+								<td>{{ mieter.mieter.plz }}</td>
+								<td>{{ mieter.mieter.email }}</td>
+								<td>{{ mieter.mieter.telefon }}</td>
+								<td>
+									<a href="{{ path('edit_mieter', {'mieter': mieter.mieter.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+								</td>								
+							</tr>
+						{% endfor %}
+					</tbody>
+					</table>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

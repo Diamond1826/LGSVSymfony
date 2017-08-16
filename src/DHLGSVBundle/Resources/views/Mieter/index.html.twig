@@ -95,7 +95,7 @@
 						</thead>
 						<tbody>
 						{% for house in houses %}					 
-							<tr class="clickable-row" data-href="{{ path('view_wohnungen', {'house': house.id},{ 'street': house.strasse}) }}">
+							<tr class="clickable-row" data-href="{{ path('view_wohnungen', {'house': house.id}) }}">
 								<td>{{ house.name }}</td>
 								<td>{{ house.strasse }}</td>
 								<td>{{ house.plz}}</td>
@@ -137,7 +137,7 @@
 					</div>
 				{% else %}
 				<div class="panel-body">
-					<table class="table table-responsive">
+					<table class="table table-responsive table-hover">
 						<thead>
 							<tr>
 								<th>Liegenschaft ID</th>
@@ -147,7 +147,7 @@
 						</thead>
 						<tbody>
 						{% for wohnung in wohnungen %}					 
-							<tr>
+							<tr class="clickable-row" data-href="{{ path('view_mieter', {'wohnung': wohnung.id}) }}">
 								<td>{{ wohnung.house.strasse }}</td>
 								<td>{{ wohnung.name }}</td>
 								<td>{{ wohnung.miete}} CHF</td>

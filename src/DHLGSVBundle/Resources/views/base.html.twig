@@ -11,7 +11,7 @@
     </head>
     <body role="document"> 
         <!-- navbar -->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed"
@@ -54,7 +54,7 @@
             <!-- /.container-fluid -->
         </nav>
         <!-- /navbar -->
-        <div class='container'>
+        <div id="content-top" class='container'>
             {% block body %}{% endblock %}
         </div> 
         {% block javascripts %}
