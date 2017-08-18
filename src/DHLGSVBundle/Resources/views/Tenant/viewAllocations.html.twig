@@ -22,10 +22,10 @@
 						<tbody>
 						{% for apartment in tenants.apartments %}					 
 							<tr>
-								<td>{{ apartment.apartment.house.strasse }}</td>
+								<td>{{ apartment.apartment.house.street }}</td>
 								<td>{{ apartment.apartment.id }}</td>
 								<td>{{ apartment.apartment.name }}</td>
-								<td>{{ apartment.apartment.miete}} CHF</td>
+								<td>{{ apartment.apartment.rent }} CHF</td>
 								<td>
 									<a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								

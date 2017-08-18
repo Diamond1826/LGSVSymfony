@@ -40,13 +40,13 @@
 						<tbody>
 						{% for tenant in tenants %}					 
 							<tr class="clickable-row" data-href="{{ path('view_allocations', {'tenant': tenant.id}) }}">
-								<td>{{ tenant.nachname }}</td>
-								<td>{{ tenant.vorname }}</td>
-								<td>{{ tenant.strasse }}</td>
-								<td>{{ tenant.plz}}</td>
-								<td>{{ tenant.ort}}</td>
+								<td>{{ tenant.lastname }}</td>
+								<td>{{ tenant.firstname }}</td>
+								<td>{{ tenant.street }}</td>
+								<td>{{ tenant.zipcode}}</td>
+								<td>{{ tenant.city}}</td>
 								<td>{{ tenant.email}}</td>
-								<td>{{ tenant.telefon}}</td>
+								<td>{{ tenant.phone}}</td>
 								<td>
 									<a href="{{ path('edit_tenant', {'tenant': tenant.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>
@@ -97,9 +97,9 @@
 						{% for house in houses %}					 
 							<tr class="clickable-row" data-href="{{ path('view_apartments', {'house': house.id}) }}">
 								<td>{{ house.name }}</td>
-								<td>{{ house.strasse }}</td>
-								<td>{{ house.plz}}</td>
-								<td>{{ house.ort}}</td>
+								<td>{{ house.street }}</td>
+								<td>{{ house.zipcode}}</td>
+								<td>{{ house.city}}</td>
 								<td>
 									<a href="{{ path('edit_house', {'house': house.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>
@@ -148,9 +148,9 @@
 						<tbody>
 						{% for apartment in apartments %}					 
 							<tr class="clickable-row" data-href="{{ path('view_tenants', {'apartment': apartment.id}) }}">
-								<td>{{ apartment.house.strasse }}</td>
+								<td>{{ apartment.house.street }}</td>
 								<td>{{ apartment.name }}</td>
-								<td>{{ apartment.miete}} CHF</td>
+								<td>{{ apartment.rent}} CHF</td>
 								<td>
 									<a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								
@@ -205,11 +205,11 @@
 							<tr>
 								<td>{{ allocation.apartment.id }}</td>
 								<td>{{ allocation.apartment.name }}</td>
-								<td>{{ allocation.apartment.miete}} CHF</td>
+								<td>{{ allocation.apartment.rent}} CHF</td>
 								<td>{{ allocation.tenant.id }}</td>
-								<td>{{ allocation.tenant.nachname }}</td>
-								<td>{{ allocation.tenant.vorname}}</td>
-								<td>{{ allocation.tenant.telefon}}</td>	
+								<td>{{ allocation.tenant.lastname }}</td>
+								<td>{{ allocation.tenant.firstname }}</td>
+								<td>{{ allocation.tenant.phone }}</td>	
 								<td>
 									<a href="{{ path('edit_allocation', {'allocation': allocation.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>							

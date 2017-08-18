@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * Tenant
  *
- * @ORM\Table(name="mieter")
+ * @ORM\Table(name="tenants")
  * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\TenantRepository")
  */
 class Tenant
@@ -26,37 +26,37 @@ class Tenant
     /**
      * @var string
      *
-     * @ORM\Column(name="vorname", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255)
      */
-    private $vorname;
+    private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nachname", type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $nachname;
+    private $lastname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="strasse", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255)
      */
-    private $strasse;
+    private $street;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="plz", type="integer")
+     * @ORM\Column(name="zipcode", type="integer")
      */
-    private $plz;
+    private $zipcode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ort", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255)
      */
-    private $ort;
+    private $city;
 
     /**
      * @var string
@@ -68,9 +68,9 @@ class Tenant
     /**
      * @var string
      *
-     * @ORM\Column(name="telefon", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255)
      */
-    private $telefon;
+    private $phone;
 
     // ...
     /**
@@ -104,128 +104,128 @@ class Tenant
     }
 
     /**
-     * Set vorname
+     * Set firstname
      *
-     * @param string $vorname
+     * @param string $firstname
      * @return Mieter
      */
-    public function setVorname($vorname)
+    public function setFirstname($firstname)
     {
-        $this->vorname = $vorname;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
     /**
-     * Get vorname
+     * Get firstname
      *
      * @return string 
      */
-    public function getVorname()
+    public function getFirstname()
     {
-        return $this->vorname;
+        return $this->firstname;
     }
 
     /**
-     * Set nachname
+     * Set lastname
      *
-     * @param string $nachname
+     * @param string $lastname
      * @return Mieter
      */
-    public function setNachname($nachname)
+    public function setLastname($lastname)
     {
-        $this->nachname = $nachname;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get nachname
+     * Get lastname
      *
      * @return string 
      */
-    public function getNachname()
+    public function getLastname()
     {
-        return $this->nachname;
+        return $this->lastname;
     }
 
     /**
-     * Get nachname vorname
+     * Get lastname fistname
      *
      * @return string 
      */
-    public function getIdNachnameVorname()
+    public function getIdLastnameFirstname()
     {
-        return "ID:".$this->id."  ".$this->nachname.", ".$this->vorname;
+        return "ID:".$this->id."  ".$this->lastname.", ".$this->firstname;
     }
 
     /**
-     * Set strasse
+     * Set street
      *
-     * @param string $strasse
+     * @param string $street
      * @return Mieter
      */
-    public function setStrasse($strasse)
+    public function setStreet($street)
     {
-        $this->strasse = $strasse;
+        $this->street = $street;
 
         return $this;
     }
 
     /**
-     * Get strasse
+     * Get street
      *
      * @return string 
      */
-    public function getStrasse()
+    public function getStreet()
     {
-        return $this->strasse;
+        return $this->street;
     }
 
     /**
-     * Set plz
+     * Set zipcode
      *
-     * @param integer $plz
+     * @param integer $zipcode
      * @return Mieter
      */
-    public function setPlz($plz)
+    public function setZipCode($zipcode)
     {
-        $this->plz = $plz;
+        $this->zipcode = $zipcode;
 
         return $this;
     }
 
     /**
-     * Get plz
+     * Get zipcode
      *
      * @return integer 
      */
-    public function getPlz()
+    public function getZipCode()
     {
-        return $this->plz;
+        return $this->zipcode;
     }
 
     /**
-     * Set ort
+     * Set city
      *
-     * @param string $ort
-     * @return Mieter
+     * @param string $city
+     * @return Tenant
      */
-    public function setOrt($ort)
+    public function setCity($city)
     {
-        $this->ort = $ort;
+        $this->city = $city;
 
         return $this;
     }
 
     /**
-     * Get ort
+     * Get city
      *
      * @return string 
      */
-    public function getOrt()
+    public function getCity()
     {
-        return $this->ort;
+        return $this->city;
     }
 
     /**
@@ -252,25 +252,25 @@ class Tenant
     }
 
     /**
-     * Set telefon
+     * Set phone
      *
-     * @param string $telefon
-     * @return Mieter
+     * @param string $phone
+     * @return Tenant
      */
-    public function setTelefon($telefon)
+    public function setPhone($phone)
     {
-        $this->telefon = $telefon;
+        $this->phone = $phone;
 
         return $this;
     }
 
     /**
-     * Get telefon
+     * Get phone
      *
      * @return string 
      */
-    public function getTelefon()
+    public function getPhone()
     {
-        return $this->telefon;
+        return $this->phone;
     }
 }

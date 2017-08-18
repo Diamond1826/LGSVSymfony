@@ -24,7 +24,7 @@ class AllocationType extends AbstractType
 
         ))->add('tenant', EntityType::class, array(
             'class' => 'DHLGSVBundle:Tenant',
-            'choice_label' => 'idnachnamevorname',
+            'choice_label' => 'idlastnamefirstname',
             'label' => 'Mieter',
             'expanded' => false,
             'multiple' => false,

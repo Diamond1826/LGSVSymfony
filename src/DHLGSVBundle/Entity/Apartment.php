@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * Apartment
  *
- * @ORM\Table(name="wohnung")
+ * @ORM\Table(name="apartments")
  * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\ApartmentRepository")
  */
 class Apartment
@@ -40,9 +40,9 @@ class Apartment
     /**
      * @var string
      *
-     * @ORM\Column(name="miete", type="string", length=255)
+     * @ORM\Column(name="rent", type="string", length=255)
      */
-    private $miete;
+    private $rent;
 
     /**
      * One Product has Many Features.
@@ -56,7 +56,7 @@ class Apartment
     }
 
     /**
-    * Get wohnungen
+    * Get Apartments
     * @return arrayCollection
     */
     public function getTenants()
@@ -78,7 +78,7 @@ class Apartment
      * Set houseId
      *
      * @param integer $houseId
-     * @return Wohnung
+     * @return Apartment
      */
     public function setHouse($house)
     {
@@ -101,7 +101,7 @@ class Apartment
      * Set name
      *
      * @param string $name
-     * @return Wohnung
+     * @return Apartment
      */
     public function setName($name)
     {
@@ -121,25 +121,25 @@ class Apartment
     }
 
     /**
-     * Set miete
+     * Set rent
      *
-     * @param string $miete
-     * @return Wohnung
+     * @param string $rent
+     * @return Apartment
      */
-    public function setMiete($miete)
+    public function setRent($rent)
     {
-        $this->miete = $miete;
+        $this->rent = $rent;
 
         return $this;
     }
 
     /**
-     * Get miete
+     * Get rent
      *
      * @return string 
      */
-    public function getMiete()
+    public function getRent()
     {
-        return $this->miete;
+        return $this->rent;
     }
 }

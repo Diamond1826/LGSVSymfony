@@ -14,7 +14,28 @@ class TenantType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('vorname')->add('nachname')->add('strasse')->add('plz')->add('ort')->add('email')->add('telefon')->add('Speichern', SubmitType::class, array(
+        $builder->add('firstname', 'text',array(
+            'label' => 'Vorname',
+
+        ))->add('lastname', 'text',array(
+            'label' => 'Nachname',
+
+        ))->add('street', 'text',array(
+            'label' => 'Strasse',
+
+        ))->add('zipcode', 'integer',array(
+            'label' => 'PLZ',
+
+        ))->add('city', 'text',array(
+            'label' => 'Ort',
+
+        ))->add('email', 'email',array(
+            'label' => 'E-Mail',
+
+        ))->add('phone', 'text',array(
+            'label' => 'Telefon',
+
+        ))->add('Speichern', SubmitType::class, array(
     'attr' => array('class' => 'btn btn-default'),));
     }
     

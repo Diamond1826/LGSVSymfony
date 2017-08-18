@@ -14,7 +14,16 @@ class HouseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('strasse')->add('plz')->add('ort')->add('Speichern', SubmitType::class, array(
+        $builder->add('name')->add('street', 'text',array(
+            'label' => 'Strasse',
+
+        ))->add('zipcode', 'integer',array(
+            'label' => 'PLZ',
+
+        ))->add('city', 'text',array(
+            'label' => 'Ort',
+
+        ))->add('Speichern', SubmitType::class, array(
     'attr' => array('class' => 'btn btn-default'),));
     }
     
@@ -35,6 +44,4 @@ class HouseType extends AbstractType
     {
         return 'dhlgsvbundle_house';
     }
-
-
 }

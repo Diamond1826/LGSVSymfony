@@ -33,23 +33,23 @@ class House
     /**
      * @var string
      *
-     * @ORM\Column(name="strasse", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255)
      */
-    private $strasse;
+    private $street;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="plz", type="integer")
+     * @ORM\Column(name="zipcode", type="integer")
      */
-    private $plz;
+    private $zipcode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ort", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255)
      */
-    private $ort;
+    private $city;
 
     // ...
     /**
@@ -112,71 +112,71 @@ class House
     }
 
     /**
-     * Set strasse
+     * Set street
      *
-     * @param string $strasse
+     * @param string $street
      * @return House
      */
-    public function setStrasse($strasse)
+    public function setStreet($street)
     {
-        $this->strasse = $strasse;
+        $this->street = $street;
 
         return $this;
     }
 
     /**
-     * Get strasse
+     * Get street
      *
      * @return string 
      */
-    public function getStrasse()
+    public function getStreet()
     {
-        return $this->strasse;
+        return $this->street;
     }
 
     /**
-     * Set plz
+     * Set zipcode
      *
-     * @param integer $plz
+     * @param integer $zipcode
      * @return House
      */
-    public function setPlz($plz)
+    public function setZipCode($zipcode)
     {
-        $this->plz = $plz;
+        $this->zipcode = $zipcode;
 
         return $this;
     }
 
     /**
-     * Get plz
+     * Get zipcode
      *
      * @return integer 
      */
-    public function getPlz()
+    public function getZipCode()
     {
-        return $this->plz;
+        return $this->zipcode;
     }
 
     /**
-     * Set ort
+     * Set city
      *
-     * @param string $ort
+     * @param string $city
      * @return House
      */
-    public function setOrt($ort)
+    public function setCity($city)
     {
-        $this->ort = $ort;
+        $this->city = $city;
 
         return $this;
     }
 
     /**
-     * Get ort
+     * Get city
      *
      * @return string 
      */
-    public function getOrt()
+    public function getCity()
     {
-        return $this->ort;
+        return $this->city;
     }
 }

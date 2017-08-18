@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 /**
  * Allocation
  *
- * @ORM\Table(name="mieter_to_wohnung")
+ * @ORM\Table(name="allocations")
  * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\AllocationRepository")
  */
 class Allocation
@@ -31,7 +31,7 @@ class Allocation
 
     /**
      * @ORM\ManyToOne(targetEntity="Apartment", inversedBy="tenants")
-     * @ORM\JoinColumn(name="wohnung_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="tenant_id", referencedColumnName="id")
      */
     private $apartment;
 

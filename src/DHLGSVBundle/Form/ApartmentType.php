@@ -17,12 +17,15 @@ class ApartmentType extends AbstractType
     {
         $builder->add('house', EntityType::class, array(
             'class' => 'DHLGSVBundle:House',
-            'choice_label' => 'strasse',
+            'choice_label' => 'street',
             'label' => 'Liegenschaft',
             'expanded' => false,
             'multiple' => false,
 
-        ))->add('name')->add('miete')->add('Speichern', SubmitType::class, array(
+        ))->add('name')->add('rent', 'text',array(
+            'label' => 'Miete',
+
+        ))->add('Speichern', SubmitType::class, array(
     'attr' => array('class' => 'btn btn-default'),
     ));
 

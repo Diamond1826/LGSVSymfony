@@ -25,12 +25,12 @@
 						<tbody>
 						{% for tenant in apartments %}					 
 							<tr>
-								<td>{{ tenant.tenant.nachname }}</td>
-								<td>{{ tenant.tenant.vorname }}</td>
-								<td>{{ tenant.tenant.strasse }}</td>
-								<td>{{ tenant.tenant.plz }}</td>
+								<td>{{ tenant.tenant.lastname }}</td>
+								<td>{{ tenant.tenant.firstname }}</td>
+								<td>{{ tenant.tenant.street }}</td>
+								<td>{{ tenant.tenant.zipcode }}</td>
 								<td>{{ tenant.tenant.email }}</td>
-								<td>{{ tenant.tenant.telefon }}</td>
+								<td>{{ tenant.tenant.phone }}</td>
 								<td>
 									<a href="{{ path('edit_tenant', {'tenant': tenant.tenant.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								
