@@ -7,18 +7,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use DHLGSVBundle\Entity\Mieter;
-use DHLGSVBundle\Form\MieterType;
+use DHLGSVBundle\Entity\Tenant;
+use DHLGSVBundle\Form\TenantType;
 use DHLGSVBundle\Entity\House;
 use DHLGSVBundle\Form\HouseType;
-use DHLGSVBundle\Entity\Wohnung;
-use DHLGSVBundle\Form\WohnungType;
-use DHLGSVBundle\Entity\MieterToWohnung;
-use DHLGSVBundle\Form\MieterToWohnungType;
+use DHLGSVBundle\Entity\Apartment;
+use DHLGSVBundle\Form\ApartmentType;
+use DHLGSVBundle\Entity\Allocation;
+use DHLGSVBundle\Form\AllocationType;
 
-class MieterController extends Controller
+class TenantController extends Controller
 {
-	 /**
+	/**
      * @Route("/", name="home")
      * @Template()
      */
@@ -26,67 +26,67 @@ class MieterController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
 
-    	$mieters = $em->getRepository('DHLGSVBundle:Mieter')->findAll();
+    	$tenants = $em->getRepository('DHLGSVBundle:Tenant')->findAll();
 
         $houses = $em->getRepository('DHLGSVBundle:House')->findAll();
 
-        $wohnungen = $em->getRepository('DHLGSVBundle:Wohnung')->findAll();
+        $apartments = $em->getRepository('DHLGSVBundle:Apartment')->findAll();
 
-        $mietertowohnungen = $em->getRepository('DHLGSVBundle:MieterToWohnung')->findAll();
+        $allocations = $em->getRepository('DHLGSVBundle:Allocation')->findAll();
  
-        return array('mieters' => $mieters, 'houses' => $houses, 'wohnungen' => $wohnungen, 'mietertowohnungen' => $mietertowohnungen);
+        return array('tenants' => $tenants, 'houses' => $houses, 'apartments' => $apartments, 'allocations' => $allocations);
     }
 
     /**
-     * @Route("/wohnungen/view/{house}", name="view_wohnungen")
+     * @Route("/apartments/view/{house}", name="view_apartments")
      * @Template()
      */
-    public function viewWohnungenAction($house)
+    public function viewApartmentsAction($house)
     {
         $em = $this->getDoctrine()->getManager();
         
-        $wohnungen = $em->getRepository(Wohnung::class)->findBy(array('house' => $house));
+        $apartments = $em->getRepository(apartment::class)->findBy(array('house' => $house));
 
-        $mietertowohnungen = $em->getRepository('DHLGSVBundle:MieterToWohnung')->findBy(array('wohnung' => $wohnungen));
+        $allocations = $em->getRepository('DHLGSVBundle:Allocation')->findBy(array('apartment' => $apartments));
  
-        return array('wohnungen' => $wohnungen, 'mietertowohnungen' => $mietertowohnungen);
+        return array('apartments' => $apartments, 'allocations' => $allocations);
     }
 
     /**
-     * @Route("/wohnungenmieter/view/{mieter}", name="view_wohnungenmieter")
+     * @Route("/allocations/view/{tenant}", name="view_allocations")
      * @Template()
      */
-    public function viewWohnungenMieterAction($mieter)
+    public function viewAllocationsAction($tenant)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $mieters = $em->getRepository('DHLGSVBundle:Mieter')->findOneById($mieter);
+        $tenants = $em->getRepository('DHLGSVBundle:Tenant')->findOneById($tenant);
  
-        return array('mieters' => $mieters);
+        return array('tenants' => $tenants);
     }
 
     /**
-     * @Route("/mieter/view/{wohnung}", name="view_mieter")
+     * @Route("/tenants/view/{apartment}", name="view_tenants")
      * @Template()
      */
-    public function viewMieterAction($wohnung)
+    public function viewTenantsAction($apartment)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $wohnungen = $em->getRepository('DHLGSVBundle:MieterToWohnung')->findBy(array('wohnung' => $wohnung));;
+        $apartments = $em->getRepository('DHLGSVBundle:Allocation')->findBy(array('apartment' => $apartment));;
  
-        return array('wohnungen' => $wohnungen);
+        return array('apartments' => $apartments);
     }
 
-	 /**
-     * @Route("/mieter/add", name="new_mieter")
+	/**
+     * @Route("/tenant/add", name="new_tenant")
      * @Template()
      */
-    public function newAction(Request $request) 
+    public function newTenantAction(Request $request) 
     { 
-    	$mieter = new Mieter();
+    	$tenant = new Tenant();
  
-    	$form = $this->createForm(MieterType::class, $mieter);
+    	$form = $this->createForm(TenantType::class, $tenant);
  
     	$form->handleRequest($request);
  
@@ -94,7 +94,7 @@ class MieterController extends Controller
         { 
     		$em = $this->getDoctrine()->getManager();
  
-    		$em->persist($mieter);
+    		$em->persist($tenant);
  
     		$em->flush();
  
@@ -139,14 +139,14 @@ class MieterController extends Controller
     }
 
     /**
-     * @Route("/mietertowohnung/add", name="new_mietertowohnung")
+     * @Route("/allocation/add", name="new_allocation")
      * @Template()
      */
-    public function newMieterToWohnungAction(Request $request) 
+    public function newAllocationAction(Request $request) 
     {
-        $mietertowohnung = new MieterToWohnung();
+        $allocation = new Allocation();
  
-        $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);
+        $form = $this->createForm(AllocationType::class, $allocation);
  
         $form->handleRequest($request);
  
@@ -154,7 +154,7 @@ class MieterController extends Controller
         { 
             $em = $this->getDoctrine()->getManager();
  
-            $em->persist($mietertowohnung);
+            $em->persist($allocation);
  
             $em->flush();
  
@@ -165,14 +165,14 @@ class MieterController extends Controller
     }
 
     /**
-     * @Route("/wohnung/add", name="new_wohnung")
+     * @Route("/apartment/add", name="new_apartment")
      * @Template()
      */
-    public function newWohnungAction(Request $request) 
+    public function newApartmentAction(Request $request) 
     { 
-        $wohnung = new Wohnung();
+        $apartment = new Apartment();
  
-        $form = $this->createForm(WohnungType::class, $wohnung);
+        $form = $this->createForm(ApartmentType::class, $apartment);
  
         $form->handleRequest($request);
  
@@ -180,7 +180,7 @@ class MieterController extends Controller
         { 
             $em = $this->getDoctrine()->getManager();
  
-            $em->persist($wohnung);
+            $em->persist($apartment);
  
             $em->flush();
  
@@ -191,36 +191,36 @@ class MieterController extends Controller
     }
  
     /**
-     * @Route("/mieter/edit/{mieter}", name="edit_mieter")
+     * @Route("/tenant/edit/{tenant}", name="edit_tenant")
      * @Template()
      */
-    public function editAction(Request $request, $mieter) 
+    public function editTenantAction(Request $request, $tenant) 
     {
     	$em = $this->getDoctrine()->getManager();
  
-    	$repository = $em->getRepository('DHLGSVBundle:Mieter');
+    	$repository = $em->getRepository('DHLGSVBundle:Tenant');
  
-    	$mieters = $repository->findOneById($mieter);
+    	$tenants = $repository->findOneById($tenant);
  
-    	if(!$mieters) 
+    	if(!$tenants) 
         {    	
     		return $this->redirectToRoute('home');
     	}
  
-    	$form = $this->createForm(MieterType::class, $mieters);
+    	$form = $this->createForm(TenantType::class, $tenants);
  
     	$form->handleRequest($request);
  
     	if ($form->isSubmitted() && $form->isValid()) 
         { 
-    		$em->persist($mieters);
+    		$em->persist($tenants);
  
     		$em->flush();
  
     		return $this->redirectToRoute('home');
     	}
  
-    	return array('form' => $form->createView(), 'mieter' => $mieter);
+    	return array('form' => $form->createView(), 'tenant' => $tenant);
     }
 
     /**
@@ -268,69 +268,69 @@ class MieterController extends Controller
     }
 
     /**
-     * @Route("/wohnung/edit/{wohnung}", name="edit_wohnung")
+     * @Route("/apartment/edit/{apartment}", name="edit_apartment")
      * @Template()
      */
-    public function editWohnungAction(Request $request, $wohnung) 
+    public function editApartmentAction(Request $request, $apartment) 
     { 
         $em = $this->getDoctrine()->getManager();
  
-        $repository = $em->getRepository('DHLGSVBundle:Wohnung');
+        $repository = $em->getRepository('DHLGSVBundle:Apartment');
  
-        $wohnungen = $repository->findOneById($wohnung);
+        $apartments = $repository->findOneById($apartment);
  
-        if(!$wohnungen) 
+        if(!$apartments) 
         {     
             return $this->redirectToRoute('home');
         }
  
-        $form = $this->createForm(WohnungType::class, $wohnungen);
+        $form = $this->createForm(ApartmentType::class, $apartments);
  
         $form->handleRequest($request);
  
         if ($form->isSubmitted() && $form->isValid()) 
         { 
-            $em->persist($wohnungen);
+            $em->persist($apartments);
  
             $em->flush();
  
             return $this->redirectToRoute('home');
         }
  
-        return array('form' => $form->createView(), 'wohnung' => $wohnung);
+        return array('form' => $form->createView(), 'apartment' => $apartment);
     }
 
     /**
-     * @Route("/mietertowohnung/edit/{mietertowohnung}", name="edit_mietertowohnung")
+     * @Route("/allocation/edit/{allocation}", name="edit_allocation")
      * @Template()
      */
-    public function editMieterToWohnungAction(Request $request, $mietertowohnung) 
+    public function editAllocationAction(Request $request, $allocation) 
     { 
         $em = $this->getDoctrine()->getManager();
  
-        $repository = $em->getRepository('DHLGSVBundle:MieterToWohnung');
+        $repository = $em->getRepository('DHLGSVBundle:Allocation');
  
-        $mietertowohnungen = $repository->findOneById($mietertowohnung);
+        $allocations = $repository->findOneById($allocation);
  
-        if(!$mietertowohnungen) 
+        if(!$allocations) 
         {     
             return $this->redirectToRoute('home');
         }
  
-        $form = $this->createForm(MieterToWohnungType::class, $mietertowohnungen);
+        $form = $this->createForm(AllocationType::class, $allocations);
  
         $form->handleRequest($request);
  
         if ($form->isSubmitted() && $form->isValid()) 
         { 
-            $em->persist($mietertowohnungen);
+            $em->persist($allocations);
 
             $em->flush();
  
             return $this->redirectToRoute('home');
         }
  
-        return array('form' => $form->createView(), 'mietertowohnung' => $mietertowohnung);
+        return array('form' => $form->createView(), 'allocation' => $allocation);
     }
 
     /**
@@ -354,27 +354,27 @@ class MieterController extends Controller
             return $this->redirectToRoute('home');
         }
         
-        $wohnungen = $em->getRepository(Wohnung::class)->findBy(array('house' => $house));
+        $apartments = $em->getRepository(Apartment::class)->findBy(array('house' => $house));
 
-        $mietertowohnungen = $em->getRepository(MieterToWohnung::class)->findBy(array('wohnung' => $wohnungen));
+        $allocations = $em->getRepository(Allocation::class)->findBy(array('apartment' => $apartments));
 
-        foreach ($mietertowohnungen as $mietertowohnung) 
+        foreach ($allocations as $allocation) 
         {
-            $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);        
+            $form = $this->createForm(AllocationType::class, $allocation);        
      
             // Lösche mietertowohnung
-            $em->remove($mietertowohnung);
+            $em->remove($allocation);
     
             // Aktualisere mietertowohnung in der Datenbank
             $em->flush();
         }
 
-        foreach ($wohnungen as $wohnung) 
+        foreach ($apartments as $apartment) 
         {
-            $form = $this->createForm(WohnungType::class, $wohnung);        
+            $form = $this->createForm(ApartmentType::class, $apartment);        
      
             // Lösche die wohnung
-            $em->remove($wohnung);
+            $em->remove($apartment);
     
             // Aktualisere Wohnung in der Datenbank
             $em->flush();
@@ -395,36 +395,36 @@ class MieterController extends Controller
     }
 
     /**
-     * @Route("/wohnung/delete/{wohnung}", name="delete_wohnung")
+     * @Route("/apartment/delete/{apartment}", name="delete_apartment")
      * @Template()
      */
-    public function deleteWohnungAction($wohnung) 
+    public function deleteApartmentAction($apartment) 
     { 
         $em = $this->getDoctrine()->getManager();
  
-        $repository = $em->getRepository('DHLGSVBundle:Wohnung');
+        $repository = $em->getRepository('DHLGSVBundle:Apartment');
  
-        $wohnungen = $repository->findOneById($wohnung);
+        $apartments = $repository->findOneById($apartment);
  
-        if(!$wohnungen) 
+        if(!$apartments) 
         {     
             return $this->redirectToRoute('home');
         }
  
-        $mietertowohnungen = $em->getRepository(MieterToWohnung::class)->findBy(array('wohnung' => $wohnung));
+        $allocations = $em->getRepository(Allocation::class)->findBy(array('apartment' => $apartment));
 
-        foreach ($mietertowohnungen as $mietertowohnung) 
+        foreach ($allocations as $allocation) 
         {
-            $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);        
+            $form = $this->createForm(AllocationType::class, $allocation);        
      
-            $em->remove($mietertowohnung);
+            $em->remove($allocation);
      
             $em->flush();
         }
 
-        $form = $this->createForm(WohnungType::class, $wohnungen);        
+        $form = $this->createForm(ApartmentType::class, $apartments);        
  
-        $em->remove($wohnungen);
+        $em->remove($apartments);
  
         $em->flush();
  
@@ -432,25 +432,25 @@ class MieterController extends Controller
     }
 
     /**
-     * @Route("/mietertowohnung/delete/{mietertowohnung}", name="delete_mietertowohnung")
+     * @Route("/allocation/delete/{allocation}", name="delete_allocation")
      * @Template()
      */
-    public function deleteMieterToWohnungAction($mietertowohnung) 
+    public function deleteAllocationAction($allocation) 
     { 
         $em = $this->getDoctrine()->getManager();
  
-        $repository = $em->getRepository('DHLGSVBundle:MieterToWohnung');
+        $repository = $em->getRepository('DHLGSVBundle:Allocation');
  
-        $mietertowohnungen = $repository->findOneById($mietertowohnung);
+        $allocations = $repository->findOneById($allocation);
  
-        if(!$mietertowohnungen) 
+        if(!$allocations) 
         {     
             return $this->redirectToRoute('home');
         }
  
-        $form = $this->createForm(MieterToWohnungType::class, $mietertowohnungen);        
+        $form = $this->createForm(AllocationType::class, $allocations);        
  
-        $em->remove($mietertowohnungen);
+        $em->remove($allocations);
  
         $em->flush();
  
@@ -458,36 +458,36 @@ class MieterController extends Controller
     }
 
     /**
-     * @Route("/mieter/delete/{mieter}", name="delete_mieter")
+     * @Route("/tenant/delete/{tenant}", name="delete_tenant")
      * @Template()
      */
-    public function deleteAction($mieter) 
+    public function deleteTenantAction($tenant) 
     { 
         $em = $this->getDoctrine()->getManager();
  
-        $repository = $em->getRepository('DHLGSVBundle:Mieter');
+        $repository = $em->getRepository('DHLGSVBundle:Tenant');
  
-        $mieters = $repository->findOneById($mieter);
+        $tenants = $repository->findOneById($tenant);
  
-        if(!$mieters) 
+        if(!$tenants) 
         {     
             return $this->redirectToRoute('home');
         }
  
-        $mietertowohnungen = $em->getRepository(MieterToWohnung::class)->findBy(array('mieter' => $mieter));
+        $allocations = $em->getRepository(Allocation::class)->findBy(array('tenant' => $tenant));
 
-        foreach ($mietertowohnungen as $mietertowohnung) 
+        foreach ($allocations as $allocation) 
         {
-            $form = $this->createForm(MieterToWohnungType::class, $mietertowohnung);        
+            $form = $this->createForm(AllocationType::class, $allocation);        
      
-            $em->remove($mietertowohnung);
+            $em->remove($allocation);
      
             $em->flush();
         }
 
-        $form = $this->createForm(MieterType::class, $mieters);        
+        $form = $this->createForm(TenantType::class, $tenants);        
  
-        $em->remove($mieters);
+        $em->remove($tenants);
  
         $em->flush();
  

@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class MieterType extends AbstractType
+class TenantType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class MieterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DHLGSVBundle\Entity\Mieter'
+            'data_class' => 'DHLGSVBundle\Entity\Tenant'
         ));
     }
 
@@ -33,7 +33,7 @@ class MieterType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dhlgsvbundle_mieter';
+        return 'dhlgsvbundle_tenant';
     }
 
 

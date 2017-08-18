@@ -19,7 +19,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading"><span class="pHeadText">Mieter</span><br><i>Klicke auf einen Eintrag um alle Wohnungen des gewählten Mieter's einzusehen</i></div>
-				{% if mieters is empty %}
+				{% if tenants is empty %}
 					<div class="panel-body">
 						<p>Noch keine Mieter vorhanden</p>
 					</div>
@@ -38,17 +38,17 @@
 							</tr>
 						</thead>
 						<tbody>
-						{% for mieter in mieters %}					 
-							<tr class="clickable-row" data-href="{{ path('view_wohnungenmieter', {'mieter': mieter.id}) }}">
-								<td>{{ mieter.nachname }}</td>
-								<td>{{ mieter.vorname }}</td>
-								<td>{{ mieter.strasse }}</td>
-								<td>{{ mieter.plz}}</td>
-								<td>{{ mieter.ort}}</td>
-								<td>{{ mieter.email}}</td>
-								<td>{{ mieter.telefon}}</td>
+						{% for tenant in tenants %}					 
+							<tr class="clickable-row" data-href="{{ path('view_allocations', {'tenant': tenant.id}) }}">
+								<td>{{ tenant.nachname }}</td>
+								<td>{{ tenant.vorname }}</td>
+								<td>{{ tenant.strasse }}</td>
+								<td>{{ tenant.plz}}</td>
+								<td>{{ tenant.ort}}</td>
+								<td>{{ tenant.email}}</td>
+								<td>{{ tenant.telefon}}</td>
 								<td>
-									<a href="{{ path('edit_mieter', {'mieter': mieter.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									<a href="{{ path('edit_tenant', {'tenant': tenant.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>
 							</tr>
 						{% endfor %}
@@ -95,7 +95,7 @@
 						</thead>
 						<tbody>
 						{% for house in houses %}					 
-							<tr class="clickable-row" data-href="{{ path('view_wohnungen', {'house': house.id}) }}">
+							<tr class="clickable-row" data-href="{{ path('view_apartments', {'house': house.id}) }}">
 								<td>{{ house.name }}</td>
 								<td>{{ house.strasse }}</td>
 								<td>{{ house.plz}}</td>
@@ -131,7 +131,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading"><span class="pHeadText">Wohnungen</span><br><i>Klicke auf einen Eintrag um alle Mieter der gewählten Wohnung einzusehen</i></div>
-				{% if wohnungen is empty %}
+				{% if apartments is empty %}
 					<div class="panel-body">
 						<p>Noch keine Wohnung vorhanden</p>
 					</div>
@@ -146,13 +146,13 @@
 							</tr>
 						</thead>
 						<tbody>
-						{% for wohnung in wohnungen %}					 
-							<tr class="clickable-row" data-href="{{ path('view_mieter', {'wohnung': wohnung.id}) }}">
-								<td>{{ wohnung.house.strasse }}</td>
-								<td>{{ wohnung.name }}</td>
-								<td>{{ wohnung.miete}} CHF</td>
+						{% for apartment in apartments %}					 
+							<tr class="clickable-row" data-href="{{ path('view_tenants', {'apartment': apartment.id}) }}">
+								<td>{{ apartment.house.strasse }}</td>
+								<td>{{ apartment.name }}</td>
+								<td>{{ apartment.miete}} CHF</td>
 								<td>
-									<a href="{{ path('edit_wohnung', {'wohnung': wohnung.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									<a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								
 							</tr>
 						{% endfor %}
@@ -182,7 +182,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading"><span class="pHeadText">Zuweisungen</span></div>
-				{% if mietertowohnungen is empty %}
+				{% if allocations is empty %}
 					<div class="panel-body">
 						<p>Noch keine Zuweisungen vorhanden</p>
 					</div>
@@ -201,17 +201,17 @@
 							</tr>
 						</thead>
 						<tbody>
-						{% for mietertowohnung in mietertowohnungen %}					 
+						{% for allocation in allocations %}					 
 							<tr>
-								<td>{{ mietertowohnung.wohnung.id }}</td>
-								<td>{{ mietertowohnung.wohnung.name }}</td>
-								<td>{{ mietertowohnung.wohnung.miete}} CHF</td>
-								<td>{{ mietertowohnung.mieter.id }}</td>
-								<td>{{ mietertowohnung.mieter.nachname }}</td>
-								<td>{{ mietertowohnung.mieter.vorname}}</td>
-								<td>{{ mietertowohnung.mieter.telefon}}</td>	
+								<td>{{ allocation.apartment.id }}</td>
+								<td>{{ allocation.apartment.name }}</td>
+								<td>{{ allocation.apartment.miete}} CHF</td>
+								<td>{{ allocation.tenant.id }}</td>
+								<td>{{ allocation.tenant.nachname }}</td>
+								<td>{{ allocation.tenant.vorname}}</td>
+								<td>{{ allocation.tenant.telefon}}</td>	
 								<td>
-									<a href="{{ path('edit_mietertowohnung', {'mietertowohnung': mietertowohnung.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									<a href="{{ path('edit_allocation', {'allocation': allocation.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>							
 							</tr>
 						{% endfor %}

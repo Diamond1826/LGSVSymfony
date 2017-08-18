@@ -54,27 +54,27 @@ class House
     // ...
     /**
      * One Product has Many Features.
-     * @OneToMany(targetEntity="Wohnung", mappedBy="house")
+     * @OneToMany(targetEntity="Apartment", mappedBy="house")
      */
-    private $wohnungen;
+    private $apartments;
     // ...
 
     public function __construct() {
-        $this->wohnungen = new ArrayCollection();
+        $this->apartments = new ArrayCollection();
     }
 
     /**
     * Get wohnungen
     * @return arrayCollection
     */
-    public function getWohnungen()
+    public function getApartments()
     {
-        return $this->wohnungen;
+        return $this->apartments;
     }
 
-     public function setWohnungen($wohnung)
+     public function setApartments($apartment)
     {
-        $this->wohnungen = $wohnung;
+        $this->apartments = $apartment;
         return $this;
     }
 

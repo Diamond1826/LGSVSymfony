@@ -26,17 +26,17 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="menu-toggle">
                     <ul class="nav navbar-nav">
-                        <li class="{% if app.request.attributes.get('_route') == 'new_mieter' %}active{% endif %}">
-                            <a href="{{ path('new_mieter') }}">Mieter hinzufügen</a>
+                        <li class="{% if app.request.attributes.get('_route') == 'new_tenant' %}active{% endif %}">
+                            <a href="{{ path('new_tenant') }}">Mieter hinzufügen</a>
                         </li>
                         <li class="{% if app.request.attributes.get('_route') == 'new_house' %}active{% endif %}">
                             <a href="{{ path('new_house') }}">Liegenschaft hinzufügen</a>
                         </li>
-                        <li class="{% if app.request.attributes.get('_route') == 'new_wohnung' %}active{% endif %}">
-                            <a href="{{ path('new_wohnung') }}">Wohnung hinzufügen</a>
+                        <li class="{% if app.request.attributes.get('_route') == 'new_apartment' %}active{% endif %}">
+                            <a href="{{ path('new_apartment') }}">Wohnung hinzufügen</a>
                         </li>
-                        <li class="{% if app.request.attributes.get('_route') == 'new_mietertowohnung' %}active{% endif %}">
-                            <a href="{{ path('new_mietertowohnung') }}">Mieter zuweisen</a>
+                        <li class="{% if app.request.attributes.get('_route') == 'new_allocation' %}active{% endif %}">
+                            <a href="{{ path('new_allocation') }}">Mieter zuweisen</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

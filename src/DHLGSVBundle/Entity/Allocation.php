@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * MieterToWohnung
+ * Allocation
  *
  * @ORM\Table(name="mieter_to_wohnung")
- * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\MieterToWohnungRepository")
+ * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\AllocationRepository")
  */
-class MieterToWohnung
+class Allocation
 {
     /**
      * @var int
@@ -24,16 +24,16 @@ class MieterToWohnung
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Mieter", inversedBy="wohnungen")
+     * @ORM\ManyToOne(targetEntity="Tenant", inversedBy="apartments")
      * @ORM\JoinColumn(name="mieter_id", referencedColumnName="id")
      */
-    private $mieter;
+    private $tenant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wohnung", inversedBy="mieters")
+     * @ORM\ManyToOne(targetEntity="Apartment", inversedBy="tenants")
      * @ORM\JoinColumn(name="wohnung_id", referencedColumnName="id")
      */
-    private $wohnung;
+    private $apartment;
 
     /**
      * Get id
@@ -50,9 +50,9 @@ class MieterToWohnung
      *
      * @return integer 
      */
-    public function getMieter()
+    public function getTenant()
     {
-        return $this->mieter;
+        return $this->tenant;
     }
 
     /**
@@ -61,9 +61,9 @@ class MieterToWohnung
      * @param mieterId
      * @return mieter
      */
-    public function setMieter($mieter)
+    public function setTenant($tenant)
     {
-        $this->mieter = $mieter;
+        $this->tenant = $tenant;
 
         return $this;
     }
@@ -73,9 +73,9 @@ class MieterToWohnung
      *
      * @return integer 
      */
-    public function getWohnung()
+    public function getApartment()
     {
-        return $this->wohnung;
+        return $this->apartment;
     }
 
     /**
@@ -84,9 +84,9 @@ class MieterToWohnung
      * @param wohnungId
      * @return wohnung
      */
-    public function setWohnung($wohnung)
+    public function setApartment($apartment)
     {
-        $this->wohnung = $wohnung;
+        $this->apartment = $apartment;
 
         return $this;
     }

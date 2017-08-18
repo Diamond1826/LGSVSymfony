@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% extends 'DHLGSVBundle::base.html.twig' %}
 {% block body %}
-<h2>Mieter Zuweisung bearbeiten</h2>
+<h2>Wohnung bearbeiten</h2>
 	{{ form_start(form) }}
 	{{ form_end(form) }}
 
@@ -12,14 +12,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4>Zuweisung löschen</h4>
+          <h4>Wohnung löschen</h4>
         </div>
         <div class="modal-body">
-          <p>Möchten Sie diese Zuweisung wirklich löschen?</p>
+          <p>Möchten Sie diese Wohnung wirklich löschen?</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-          <a href="{{ path('delete_mietertowohnung', {'mietertowohnung' : mietertowohnung}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Löschen</a>
+          <a href="{{ path('delete_apartment', {'apartment' : apartment}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Löschen</a>
         </div>
       </div>
     </div>

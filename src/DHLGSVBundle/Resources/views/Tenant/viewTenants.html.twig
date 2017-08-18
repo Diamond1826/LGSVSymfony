@@ -4,7 +4,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading"><span class="pHeadText">Mieter</span></div>
-				{% if wohnungen is empty %}
+				{% if apartments is empty %}
 					<div class="panel-body">
 						<p>Noch keine Mieter vorhanden</p>
 					</div>
@@ -23,16 +23,16 @@
 							</tr>
 						</thead>
 						<tbody>
-						{% for mieter in wohnungen %}					 
+						{% for tenant in apartments %}					 
 							<tr>
-								<td>{{ mieter.mieter.nachname }}</td>
-								<td>{{ mieter.mieter.vorname }}</td>
-								<td>{{ mieter.mieter.strasse }}</td>
-								<td>{{ mieter.mieter.plz }}</td>
-								<td>{{ mieter.mieter.email }}</td>
-								<td>{{ mieter.mieter.telefon }}</td>
+								<td>{{ tenant.tenant.nachname }}</td>
+								<td>{{ tenant.tenant.vorname }}</td>
+								<td>{{ tenant.tenant.strasse }}</td>
+								<td>{{ tenant.tenant.plz }}</td>
+								<td>{{ tenant.tenant.email }}</td>
+								<td>{{ tenant.tenant.telefon }}</td>
 								<td>
-									<a href="{{ path('edit_mieter', {'mieter': mieter.mieter.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									<a href="{{ path('edit_tenant', {'tenant': tenant.tenant.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								
 							</tr>
 						{% endfor %}

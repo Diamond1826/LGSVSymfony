@@ -8,24 +8,29 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class WohnungType extends AbstractType
+class AllocationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('house', EntityType::class, array(
-            'class' => 'DHLGSVBundle:House',
-            'choice_label' => 'strasse',
-            'label' => 'Liegenschaft',
+        $builder->add('apartment', EntityType::class, array(
+            'class' => 'DHLGSVBundle:Apartment',
+            'choice_label' => 'name',
+            'label' => 'Wohnung',
             'expanded' => false,
             'multiple' => false,
 
-        ))->add('name')->add('miete')->add('Speichern', SubmitType::class, array(
-    'attr' => array('class' => 'btn btn-default'),
-    ));
+        ))->add('tenant', EntityType::class, array(
+            'class' => 'DHLGSVBundle:Tenant',
+            'choice_label' => 'idnachnamevorname',
+            'label' => 'Mieter',
+            'expanded' => false,
+            'multiple' => false,
 
+        ))->add('Speichern', SubmitType::class, array(
+    'attr' => array('class' => 'btn btn-default'),));
     }
     
     /**
@@ -34,7 +39,7 @@ class WohnungType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DHLGSVBundle\Entity\Wohnung'
+            'data_class' => 'DHLGSVBundle\Entity\Allocation'
         ));
     }
 
@@ -43,7 +48,7 @@ class WohnungType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dhlgsvbundle_wohnung';
+        return 'dhlgsvbundle_allocation';
     }
 
 

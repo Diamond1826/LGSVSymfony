@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\OneToMany;
 
 /**
- * Mieter
+ * Tenant
  *
  * @ORM\Table(name="mieter")
- * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\MieterRepository")
+ * @ORM\Entity(repositoryClass="DHLGSVBundle\Repository\TenantRepository")
  */
-class Mieter
+class Tenant
 {
     /**
      * @var int
@@ -75,22 +75,22 @@ class Mieter
     // ...
     /**
      * One Product has Many Features.
-     * @OneToMany(targetEntity="MieterToWohnung", mappedBy="mieter")
+     * @OneToMany(targetEntity="Allocation", mappedBy="tenant")
      */
-    private $wohnungen;
+    private $apartments;
     // ...
 
     public function __construct() {
-        $this->wohnungen = new ArrayCollection();
+        $this->apartments = new ArrayCollection();
     }
 
     /**
     * Get wohnungen
     * @return arrayCollection
     */
-    public function getWohnungen()
+    public function getApartments()
     {
-        return $this->wohnungen;
+        return $this->apartments;
     }
 
     /**
