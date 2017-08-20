@@ -13,9 +13,9 @@
 					<table class="table table-responsive">
 						<thead>
 							<tr>
-								<th>Liegenschaft ID</th>
-								<th>Wohnung ID</th>
-								<th>Name</th>
+								<th>Liegenschafts-ID</th>
+								<th>Wohnungs-ID</th>
+								<th>Wohnungsbezeichnung</th>
 								<th>Miete</th>
 							</tr>
 						</thead>
@@ -25,7 +25,7 @@
 								<td>{{ apartment.house.street }}</td>
 								<td>{{ apartment.id }}</td>
 								<td>{{ apartment.name }}</td>
-								<td>{{ apartment.rent }} CHF</td>
+								<td>CHF {{ apartment.rent }}</td>
 								<td>
 									<a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								
@@ -51,10 +51,10 @@
 					<table class="table table-responsive">
 						<thead>
 							<tr>
-								<th>Wohnungs ID</th>
-								<th>Wohnungsname</th>
+								<th>Wohnungs-ID</th>
+								<th>Wohnungsbezeichnung</th>
 								<th>Miete</th>
-								<th>Mieter ID</th>
+								<th>Mieter-ID</th>
 								<th>Nachname</th>
 								<th>Vorname</th>
 								<th>Telefon</th>
@@ -65,7 +65,7 @@
 							<tr>
 								<td>{{ allocation.apartment.id }}</td>
 								<td>{{ allocation.apartment.name }}</td>
-								<td>{{ allocation.apartment.rent }} CHF</td>
+								<td>CHF {{ allocation.apartment.rent }}</td>
 								<td>{{ allocation.tenant.id }}</td>
 								<td>{{ allocation.tenant.lastname }}</td>
 								<td>{{ allocation.tenant.firstname }}</td>

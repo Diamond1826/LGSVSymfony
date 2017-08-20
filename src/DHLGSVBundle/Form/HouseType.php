@@ -14,7 +14,10 @@ class HouseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('street', 'text',array(
+        $builder->add('name', 'text',array(
+            'label' => 'Bezeichnung',
+
+        ))->add('street', 'text',array(
             'label' => 'Strasse',
 
         ))->add('zipcode', 'integer',array(

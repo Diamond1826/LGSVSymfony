@@ -13,9 +13,9 @@
 					<table class="table table-responsive">
 						<thead>
 							<tr>
-								<th>Liegenschaft ID</th>
-								<th>Wohnung ID</th>
-								<th>Name</th>
+								<th>Liegenschafts-ID</th>
+								<th>Wohnungs-ID</th>
+								<th>Wohnungsbezeichnung</th>
 								<th>Miete</th>
 							</tr>
 						</thead>
@@ -25,7 +25,7 @@
 								<td>{{ apartment.apartment.house.street }}</td>
 								<td>{{ apartment.apartment.id }}</td>
 								<td>{{ apartment.apartment.name }}</td>
-								<td>{{ apartment.apartment.rent }} CHF</td>
+								<td>CHF {{ apartment.apartment.rent }}</td>
 								<td>
 									<a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 								</td>								

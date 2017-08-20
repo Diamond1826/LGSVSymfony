@@ -56,7 +56,7 @@ class Apartment
     }
 
     /**
-    * Get Apartments
+    * Get tenants
     * @return arrayCollection
     */
     public function getTenants()
@@ -78,7 +78,7 @@ class Apartment
      * Set houseId
      *
      * @param integer $houseId
-     * @return Apartment
+     * @return House
      */
     public function setHouse($house)
     {
@@ -101,7 +101,7 @@ class Apartment
      * Set name
      *
      * @param string $name
-     * @return Apartment
+     * @return name
      */
     public function setName($name)
     {
@@ -124,7 +124,7 @@ class Apartment
      * Set rent
      *
      * @param string $rent
-     * @return Apartment
+     * @return rent
      */
     public function setRent($rent)
     {

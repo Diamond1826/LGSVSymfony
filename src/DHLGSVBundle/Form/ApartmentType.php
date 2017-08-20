@@ -22,7 +22,10 @@ class ApartmentType extends AbstractType
             'expanded' => false,
             'multiple' => false,
 
-        ))->add('name')->add('rent', 'text',array(
+        ))->add('name', 'text',array(
+            'label' => 'Bezeichnung',
+
+        ))->add('rent', 'text',array(
             'label' => 'Miete',
 
         ))->add('Speichern', SubmitType::class, array(

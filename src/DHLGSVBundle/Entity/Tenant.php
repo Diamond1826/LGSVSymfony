@@ -85,7 +85,7 @@ class Tenant
     }
 
     /**
-    * Get wohnungen
+    * Get apartments
     * @return arrayCollection
     */
     public function getApartments()
@@ -107,7 +107,7 @@ class Tenant
      * Set firstname
      *
      * @param string $firstname
-     * @return Mieter
+     * @return Tenant
      */
     public function setFirstname($firstname)
     {
@@ -130,7 +130,7 @@ class Tenant
      * Set lastname
      *
      * @param string $lastname
-     * @return Mieter
+     * @return Tenant
      */
     public function setLastname($lastname)
     {
@@ -163,7 +163,7 @@ class Tenant
      * Set street
      *
      * @param string $street
-     * @return Mieter
+     * @return Tenant
      */
     public function setStreet($street)
     {
@@ -186,7 +186,7 @@ class Tenant
      * Set zipcode
      *
      * @param integer $zipcode
-     * @return Mieter
+     * @return Tenant
      */
     public function setZipCode($zipcode)
     {
@@ -232,7 +232,7 @@ class Tenant
      * Set email
      *
      * @param string $email
-     * @return Mieter
+     * @return Tenant
      */
     public function setEmail($email)
     {

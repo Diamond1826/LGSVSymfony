@@ -64,7 +64,7 @@ class House
     }
 
     /**
-    * Get wohnungen
+    * Get apartments
     * @return arrayCollection
     */
     public function getApartments()
@@ -72,6 +72,11 @@ class House
         return $this->apartments;
     }
 
+    /**
+    * Set apartments
+    * @param apartment
+    * @return House
+    */
      public function setApartments($apartment)
     {
         $this->apartments = $apartment;
@@ -104,7 +109,7 @@ class House
     /**
      * Get name
      *
-     * @return string 
+     * @return string name 
      */
     public function getName()
     {

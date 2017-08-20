@@ -110,28 +110,28 @@ class TenantController extends Controller
      */
     public function newHouseAction(Request $request) 
     { 
-        // Erstelle "dummy"-House als Referenz
+        // Create "dummy"-House as reference
         $house = new House();
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
+        // Create new Form based on HouseType
         $form = $this->createForm(HouseType::class, $house);
  
-        // Verarbeite Request (falls Formular abgesendet wurde)
+        // Handle Request (if form is sent)
         $form->handleRequest($request);
  
-        // Wenn das Formular abgesendet und die Daten gültig sind ...
+        // if form is sent and data is valid ...
         if ($form->isSubmitted() && $form->isValid()) 
         { 
-            // Hole den EntityManager 
+            // Get EntityManager 
             $em = $this->getDoctrine()->getManager();
  
-            // Gib das House an den EntityManager
+            // Pass House to EntityManager
             $em->persist($house);
  
-            // Schreibe House in die Datenbank
+            // Write House on database
             $em->flush();
  
-            // Und leite auf die Startseite weiter
+            // redirect to startpage
             return $this->redirectToRoute('home');
         }
  
@@ -229,38 +229,38 @@ class TenantController extends Controller
      */
     public function editHouseAction(Request $request, $house) 
     { 
-        // Hole den EntityManager
+        // Get EntityManager
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das House Repository
+        // Get House repository
         $repository = $em->getRepository('DHLGSVBundle:House');
  
-        // Suche das House anhand der übergebenen ID
+        // Search House based on submitted ID
         $houses = $repository->findOneById($house);
  
-        // Leite auf Startseite wenn das House nicht existiert
+        // Redirect to startpage if House doesn't exist
         if(!$houses) 
         {     
             return $this->redirectToRoute('home');
         }
  
-        // Erstelle neues Form auf Grundlage des HouseTypes
-        // Und des gefundenen Houses
+        // Create new Form based on HouseType
+        // and found House
         $form = $this->createForm(HouseType::class, $houses);
  
-        // Verarbeite Request (falls Formular abgesendet wurde)
+        // Handle Request (if form is sent)
         $form->handleRequest($request);
  
-        // Wenn das Formular abgesendet und die Daten gültig sind ...
+        // if form is sent and data is valid ...
         if ($form->isSubmitted() && $form->isValid()) 
         { 
-            // Gib das House an den EntityManager
+            // Pass House to EntityManager
             $em->persist($houses);
  
-            // Aktualisere House in der Datenbank
+            // Refresh House data on database
             $em->flush();
  
-            // Und leite auf die Startseite weiter
+            // Redirect to startpage
             return $this->redirectToRoute('home');
         }
  
@@ -339,58 +339,61 @@ class TenantController extends Controller
      */
     public function deleteHouseAction($house) 
     { 
-        // Hole den EntityManager
+        // Get EntityManager
         $em = $this->getDoctrine()->getManager();
  
-        // Hole das House Repository
+        // Get House repository
         $repository = $em->getRepository('DHLGSVBundle:House');
  
-        // Suche das House anhand der übergebenen ID
+        // Search House based on submitted house ID
         $houses = $repository->findOneById($house);
  
-        // Leite auf Startseite wenn das House nicht existiert
+        // Redirect to startpage if House doesn't exist
         if(!$houses) 
         {     
             return $this->redirectToRoute('home');
         }
-        
-        $apartments = $em->getRepository(Apartment::class)->findBy(array('house' => $house));
 
+        // Get Apartment repository and search Apartments based on submitted house ID
+        $apartments = $em->getRepository(Apartment::class)->findBy(array('house' => $house));
+        
+        // Get Allocation repository and search Allocations based on submitted apartment IDs
         $allocations = $em->getRepository(Allocation::class)->findBy(array('apartment' => $apartments));
 
         foreach ($allocations as $allocation) 
-        {
+        {   
+            // Create Form based on AllocationType and $allocation data
             $form = $this->createForm(AllocationType::class, $allocation);        
      
-            // Lösche mietertowohnung
+            // Delete allocation from clipboard
             $em->remove($allocation);
     
-            // Aktualisere mietertowohnung in der Datenbank
+            // Refresh allocation on database
             $em->flush();
         }
 
         foreach ($apartments as $apartment) 
         {
+            // Create Form based on ApartmentType and $apartment data
             $form = $this->createForm(ApartmentType::class, $apartment);        
      
-            // Lösche die wohnung
+            // Delete apartment from clipboard
             $em->remove($apartment);
     
-            // Aktualisere Wohnung in der Datenbank
+            // Refresh apartment on database
             $em->flush();
         }
 
-        // Erstelle neues Form auf Grundlage des HouseTypes
-        // Und des gefundenen Houses
+        // Create Form based on HouseType and $houses data
         $form = $this->createForm(HouseType::class, $houses);        
  
-        // Lösche das House
+        // Delete house from clipboard
         $em->remove($houses);
  
-        // Aktualisere House in der Datenbank
+        // Refresh house on database
         $em->flush();
  
-        // Und leite auf die Startseite weiter
+        // Redirect to startpage
         return $this->redirectToRoute('home');
     }
 

@@ -25,13 +25,13 @@ class Allocation
 
     /**
      * @ORM\ManyToOne(targetEntity="Tenant", inversedBy="apartments")
-     * @ORM\JoinColumn(name="mieter_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="tenant_id", referencedColumnName="id")
      */
     private $tenant;
 
     /**
      * @ORM\ManyToOne(targetEntity="Apartment", inversedBy="tenants")
-     * @ORM\JoinColumn(name="tenant_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="apartment_id", referencedColumnName="id")
      */
     private $apartment;
 
@@ -46,7 +46,7 @@ class Allocation
     }
 
     /**
-     * Get mieter id
+     * Get tenant
      *
      * @return integer 
      */
@@ -56,10 +56,10 @@ class Allocation
     }
 
     /**
-     * Set mieter
+     * Set tenant
      *
-     * @param mieterId
-     * @return mieter
+     * @param tenant
+     * @return tenant
      */
     public function setTenant($tenant)
     {
@@ -69,7 +69,7 @@ class Allocation
     }
 
     /**
-     * Get wohnung id
+     * Get apartment id
      *
      * @return integer 
      */
@@ -79,10 +79,10 @@ class Allocation
     }
 
     /**
-     * Set mieter
+     * Set apartment
      *
-     * @param wohnungId
-     * @return wohnung
+     * @param apartment
+     * @return apartment
      */
     public function setApartment($apartment)
     {
