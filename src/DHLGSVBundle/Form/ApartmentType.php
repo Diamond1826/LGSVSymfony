@@ -16,6 +16,7 @@ class ApartmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('house', EntityType::class, array(
+            'placeholder' => 'Wähle eine Liegenschaft',
             'class' => 'DHLGSVBundle:House',
             'choice_label' => 'street',
             'label' => 'Liegenschaft',

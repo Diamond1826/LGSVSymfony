@@ -16,6 +16,7 @@ class AllocationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('apartment', EntityType::class, array(
+            'placeholder' => 'Wähle eine Wohnung',
             'class' => 'DHLGSVBundle:Apartment',
             'choice_label' => 'name',
             'label' => 'Wohnung',
@@ -23,6 +24,7 @@ class AllocationType extends AbstractType
             'multiple' => false,
 
         ))->add('tenant', EntityType::class, array(
+            'placeholder' => 'Wähle einen Mieter',
             'class' => 'DHLGSVBundle:Tenant',
             'choice_label' => 'idlastnamefirstname',
             'label' => 'Mieter',
