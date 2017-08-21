@@ -5,6 +5,7 @@ namespace DHLGSVBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * House
@@ -25,28 +26,46 @@ class House
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 30,
+     *      minMessage = "Die Strasse muss mind. {{ limit }} Zeichen lang sein",
+     *      maxMessage = "Die Strasse darf nicht länger als {{ limit }} Zeichen lang sein"
+     * )
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Range(
+     *      min = 1000,
+     *      max = 9999,
+     *      invalidMessage = "Das Feld darf nur Zahlen beinhalten",
+     *      minMessage = "Die PLZ muss min. {{ limit }} betragen",
+     *      maxMessage = "Die PLZ darf max. {{ limit }} betragen")
      * @ORM\Column(name="zipcode", type="integer")
      */
     private $zipcode;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Der Ort muss mind. {{ limit }} Zeichen lang sein",
+     *      maxMessage = "Der Ort darf nicht länger als {{ limit }} Zeichen lang sein"
+     * )
      * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;

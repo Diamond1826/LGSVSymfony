@@ -5,6 +5,7 @@ namespace DHLGSVBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tenant
@@ -25,56 +26,94 @@ class Tenant
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Der Vorname muss mind. {{ limit }} Zeichen lang sein",
+     *      maxMessage = "Der Vorname darf nicht länger als {{ limit }} Zeichen lang sein"
+     * )
      * @ORM\Column(name="firstname", type="string", length=255)
      */
     private $firstname;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Der Nachname muss mind. {{ limit }} Zeichen lang sein",
+     *      maxMessage = "Der Nachname darf nicht länger als {{ limit }} Zeichen lang sein"
+     * )
      * @ORM\Column(name="lastname", type="string", length=255)
      */
     private $lastname;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 30,
+     *      minMessage = "Die Strasse muss mind. {{ limit }} Zeichen lang sein",
+     *      maxMessage = "Die Strasse darf nicht länger als {{ limit }} Zeichen lang sein"
+     * )
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Range(
+     *      min = 1000,
+     *      max = 9999,
+     *      invalidMessage = "Das Feld darf nur Zahlen beinhalten",
+     *      minMessage = "Die PLZ muss min. {{ limit }} betragen",
+     *      maxMessage = "Die PLZ darf max. {{ limit }} betragen")
      * @ORM\Column(name="zipcode", type="integer")
      */
     private $zipcode;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Der Ort muss mind. {{ limit }} Zeichen lang sein",
+     *      maxMessage = "Der Ort darf nicht länger als {{ limit }} Zeichen lang sein"
+     * )
      * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Email(
+     *     message = "Die E-Mail Adresse '{{ value }}' ist nicht gültig.",
+     *     checkMX = true)
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Regex(
+     *     pattern="/^(\+41|0041|0){1}(\(0\))?[0-9]{9}$/",
+     *     match=true,
+     *     message="Diese Nummer ist ungültig, Beispiel: 0041795557788 oder +41795557788"
+     * )
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
 
     // ...
     /**
-     * One Product has Many Features.
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
      * @OneToMany(targetEntity="Allocation", mappedBy="tenant")
      */
     private $apartments;

@@ -15,6 +15,9 @@ use DHLGSVBundle\Entity\Apartment;
 use DHLGSVBundle\Form\ApartmentType;
 use DHLGSVBundle\Entity\Allocation;
 use DHLGSVBundle\Form\AllocationType;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use DHLGSVBundle\Repository\TenantRepository;
 
 class TenantController extends Controller
 {

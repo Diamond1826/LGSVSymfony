@@ -6,7 +6,7 @@
 				<div class="panel-heading">Suche Mieter</div>
 					<div class="panel-body">
 					<div class="input-group">
-						<input type="text" class="form-control">
+						<input id="search" type="text" placeholder="Mieter..." class="form-control">
 						<div class="input-group-btn">
 							<button class="btn btn-default" type="button">Suchen</button>
 						</div>
@@ -65,7 +65,7 @@
 				<div class="panel-heading">Suche Liegenschaft</div>
 					<div class="panel-body">
 					<div class="input-group">
-						<input type="text" class="form-control">
+						<input type="search" placeholder="Liegenschaft..." class="form-control">
 						<div class="input-group-btn">
 							<button class="btn btn-default" type="button">Suchen</button>
 						</div>
@@ -118,7 +118,7 @@
 				<div class="panel-heading">Suche Wohnung</div>
 					<div class="panel-body">
 					<div class="input-group">
-						<input type="text" class="form-control">
+						<input type="search" placeholder="Wohnung..." class="form-control">
 						<div class="input-group-btn">
 							<button class="btn btn-default" type="button">Suchen</button>
 						</div>
@@ -137,7 +137,7 @@
 					</div>
 				{% else %}
 				<div class="panel-body">
-					<table class="table table-responsive table-hover">
+					<table id="tenant_table" class="table table-responsive table-hover">
 						<thead>
 							<tr>
 								<th>Liegenschafts-ID</th>
@@ -169,7 +169,7 @@
 				<div class="panel-heading">Suche Zuweisung</div>
 					<div class="panel-body">
 					<div class="input-group">
-						<input type="text" class="form-control">
+						<input type="search" placeholder="Zuweisung..." class="form-control">
 						<div class="input-group-btn">
 							<button class="btn btn-default" type="button">Suchen</button>
 						</div>

@@ -2,6 +2,6 @@
 {% extends 'DHLGSVBundle::base.html.twig' %}
 {% block body %}
 	<h2>Mieter zuweisen</h2>
-	{{ form_start(form) }}
+	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
 	{{ form_end(form) }}	
 {% endblock %}

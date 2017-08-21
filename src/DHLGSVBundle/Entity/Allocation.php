@@ -5,6 +5,7 @@ namespace DHLGSVBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Allocation
@@ -24,12 +25,14 @@ class Allocation
     private $id;
 
     /**
+     * @Assert\NotBlank(message = "Bitte Mieter auswählen")
      * @ORM\ManyToOne(targetEntity="Tenant", inversedBy="apartments")
      * @ORM\JoinColumn(name="tenant_id", referencedColumnName="id")
      */
     private $tenant;
 
     /**
+     * @Assert\NotBlank(message = "Bitte Wohnung auswählen")
      * @ORM\ManyToOne(targetEntity="Apartment", inversedBy="tenants")
      * @ORM\JoinColumn(name="apartment_id", referencedColumnName="id")
      */

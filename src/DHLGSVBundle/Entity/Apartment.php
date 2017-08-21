@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Apartment
@@ -25,6 +26,7 @@ class Apartment
     private $id;
 
     /**
+     * @Assert\NotBlank(message = "Bitte Liegenschaft auswählen")
      * @ORM\ManyToOne(targetEntity="House", inversedBy="wohnungen")
      * @ORM\JoinColumn(name="house_id", referencedColumnName="id")
      */
@@ -32,14 +34,20 @@ class Apartment
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "Dieses Feld sollte nicht leer sein")
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 50000,
+     *      invalidMessage = "Das Feld darf nur Zahlen beinhalten",
+     *      minMessage = "Die Miete muss min. {{ limit }} betragen",
+     *      maxMessage = "Die Miete darf max. {{ limit }} betragen")
      * @ORM\Column(name="rent", type="string", length=255)
      */
     private $rent;
